@@ -2,18 +2,18 @@
 
 **Monday, November 23, 2026 | 10:30 am-noon ET | 90 minutes**
 
-> **How this guide works.** This is the single document we'll follow together.
-> Each section has up to three parts:
+> **How this guide works.** This is a hands-on workshop: you'll do every step on
+> your own machine. Each section has these parts:
 >
 > - **Scenario & Background**: sets the stage and explains when you'd use the
->   technique at work (read along on screen).
-> - **▶️ Example**: demonstrated live. Watch, or follow along if you're comfortable.
-> - **🧑‍💻 Try it yourself**: hands-on practice (mainly in S8).
+>   technique at work.
+> - **▶️ Follow along**: we do it on screen and you do it at the same time.
+> - **🧑‍💻 Your turn**: you run the whole loop on your own (S8).
 >
 > Prompts and commands appear in code blocks so they're easy to copy. Use whichever
 > approved surface you prefer: Copilot App, Copilot CLI, or VS Code. Everyone's
-> experience level is welcome; you don't need to keep your tools in lockstep with
-> the demo.
+> experience level is welcome. If you fall behind, pick up at the next step; your
+> results don't need to match the screen exactly.
 >
 > **Draft, rehearsal pending:** prompts, commands, and timings have not been run yet.
 > Items in [brackets] will be filled in after the dry-run.
@@ -55,8 +55,8 @@ Ahead of the workshop you were asked to:
 Upload it to [where participants add the file]. If a section needs another file, it
 will be shared on its own with instructions for where to add it.
 
-If something isn't ready, you can still follow every demonstration and catch up on
-the hands-on part afterward.
+If something isn't ready, pair with a neighbor or follow on screen for now, and
+we'll get you set up after the session.
 
 ---
 
@@ -64,14 +64,14 @@ the hands-on part afterward.
 
 | Time | Section | Format |
 | --- | --- | --- |
-| 0-5 | S1. Welcome and surface map | ▶️ Example |
-| 5-15 | S2. Copilot App: sessions, modes, and Fusion | ▶️ Example |
-| 15-32 | S3. Feature development | ▶️ Example |
-| 32-40 | S4. Testing | ▶️ Example |
-| 40-48 | S5. Copilot CLI | ▶️ Example |
-| 48-55 | S6. Pull request and code review | ▶️ Example |
-| 55-60 | S7. CI and agentic automation | ▶️ Example |
-| 60-80 | S8. Your turn | 🧑‍💻 Try it yourself |
+| 0-5 | S1. Welcome and surface map | ▶️ Follow along |
+| 5-15 | S2. Copilot App: sessions, modes, and Fusion | ▶️ Follow along |
+| 15-32 | S3. Feature development | ▶️ Follow along |
+| 32-40 | S4. Testing | ▶️ Follow along |
+| 40-48 | S5. Copilot CLI | ▶️ Follow along |
+| 48-55 | S6. Pull request and code review | ▶️ Follow along |
+| 55-60 | S7. CI and agentic automation | ▶️ Follow along |
+| 60-80 | S8. Your turn | 🧑‍💻 Your turn |
 | 80-90 | S9. Wrap-up | Discussion |
 
 ---
@@ -109,15 +109,15 @@ jobs that need reasoning).
 - **Copilot doesn't replace the review.** Every step still ends with a person
   checking the result.
 
-#### ▶️ Example (follow along)
+#### ▶️ Follow along
 
 > Quick readiness check. Can you:
 >
 > 1. Sign in to GitHub and see Copilot as available?
 > 2. Open the Copilot App, or start `copilot` in a terminal?
 >
-> If not, say so in the chat now and keep watching. We'll sort out individual setups
-> after the session rather than hold up the group.
+> If not, say so in the chat now and pair with a neighbor or follow on screen. We'll
+> sort out individual setups after the session rather than hold up the group.
 
 **Learn more:** [Copilot App](https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app),
 [Copilot CLI](https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli),
@@ -195,7 +195,7 @@ follow CI and review feedback through to merge.
 - "Worktree changes are on my main branch." They're on the worktree's own branch
   until you merge them.
 
-#### ▶️ Example (follow along)
+#### ▶️ Follow along
 
 > 1. In a **chat**, ask a scoping question. Notice there's no plan, workspace, or
 >    file changes:
@@ -238,7 +238,7 @@ prove the behavior works. Keep the slice small enough to review in a few minutes
 adding one behavior to an existing page; getting a second opinion on an approach
 before you commit to it.
 
-#### ▶️ Example (follow along)
+#### ▶️ Follow along
 
 > 1. Tighten the plan (draft, to be rehearsed):
 >
@@ -272,7 +272,7 @@ asking for a fix.
 skip; explaining and repairing a failing test; checking that a test actually fails
 when the behavior breaks.
 
-#### ▶️ Example (follow along)
+#### ▶️ Follow along
 
 > 1. Ask for focused tests (draft, to be rehearsed):
 >
@@ -307,7 +307,7 @@ review it, and plain prompts can make small changes such as a documentation upda
 opening an editor; Git tasks such as summarizing history; one-shot scripted prompts
 with `copilot -p`.
 
-#### ▶️ Example (follow along)
+#### ▶️ Follow along
 
 > 1. Open the same worktree and confirm where you are:
 >
@@ -351,7 +351,7 @@ evidence. Green checks alone aren't approval.
 before a teammate looks; checking a change against the original requirement; applying
 a suggested fix in a couple of clicks.
 
-#### ▶️ Example (follow along)
+#### ▶️ Follow along
 
 > 1. Draft the PR description (draft, to be rehearsed):
 >
@@ -387,9 +387,9 @@ or triaging an issue. Because an agent can act, check four things before it runs
 **Common uses:** CI failure analysis; issue triage; documentation updates; daily
 repository summaries.
 
-#### ▶️ Example (follow along)
+#### ▶️ Follow along
 
-> We'll read these files together. We won't run them.
+> Open these files in your copy of the repository. We'll read them, not run them.
 >
 > ```text
 > .github/workflows/ci.yml                        # ordinary CI: fixed steps
@@ -416,7 +416,7 @@ shopping** action, and keep the cart badge correct.
 **Background:** You'll run the same loop on your own: plan, build, test, review. Stay
 in one surface (App, CLI, or VS Code) rather than switching mid-exercise.
 
-#### 🧑‍💻 Try it yourself
+#### 🧑‍💻 Your turn
 
 > 1. Start from the participant starter: [starter repository or branch].
 >
@@ -548,7 +548,7 @@ Features and labels were checked against GitHub docs and changelog on November 2
 | 6:00-9:00 | Pick Fusion (Standard or High); send the planning prompt below; show the plan in the side panel; hover over the effort label to show the models used. Don't approve yet; S3 continues from here |
 | 9:00-10:00 | Recap: chat vs session, mode vs permissions, effort matches the task |
 
-The chat and planning prompts are in the S2 **Example**.
+The chat and planning prompts are in the S2 **Follow along** steps.
 
 **Fallbacks:**
 
