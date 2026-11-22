@@ -2,36 +2,43 @@
 
 **Monday, November 23, 2026 | 10:30 am-noon ET | 90 minutes**
 
-> **Working draft - rehearsal required.** This is a usable outline, not a finished
-> participant handout. Source files have been imported and inspected; the application,
-> exercises, prompts, timings, reviews, and CI have not been run in this repository.
-> We will rehearse each section together, capture actual results, then make an
-> editorial and timing pass. No cart starter or participant checkpoint is prepared.
+> **How this guide works.** This is the single document we'll follow together.
+> Each section has up to three parts:
+>
+> - **Scenario & Background**: sets the stage and explains when you'd use the
+>   technique at work (read along on screen).
+> - **▶️ Example**: demonstrated live. Watch, or follow along if you're comfortable.
+> - **🧑‍💻 Try it yourself**: hands-on practice (mainly in S8).
+>
+> Prompts and commands appear in code blocks so they're easy to copy. Use whichever
+> approved surface you prefer: Copilot App, Copilot CLI, or VS Code. Everyone's
+> experience level is welcome; you don't need to keep your tools in lockstep with
+> the demo.
+>
+> **Draft, rehearsal pending:** prompts, commands, and timings have not been run yet.
+> Items in [brackets] will be filled in after the dry-run.
 
-## Introduction
+---
 
-To make the most of our 90 minutes, we'll follow one workshop guide built around a
-single development scenario in Octocat Supply. The guide brings together selected
-exercises and techniques from the Copilot Academy materials, connecting planning,
-implementation, testing, review, and CI into one practical workflow. We'll combine
-demonstrations with guided practice rather than complete each original lab in full.
-Follow this guide during the session; the original resources are linked at the end
-for deeper exploration afterward.
+## The app we're working in: Octocat Supply
 
-The session welcomes mixed levels of Copilot experience. **Watch the demonstration**
-means follow the presenter without keeping your tools in lockstep. **Try it yourself**
-marks guided practice in your chosen surface. **Optional follow-up** is outside the
-90-minute core; it is not required to keep up.
+Octocat Supply is a small supply-chain demo app: a TypeScript/Express API with a
+SQLite database, and a React/Vite/Tailwind front end. It manages **products**,
+**suppliers**, **orders**, and **deliveries** for a fictional company's branches.
 
-## Learning outcomes
+The products page lets you pick a quantity and click **Add to Cart**, but the cart
+isn't built yet: the button only shows a pop-up message. That gap is our scenario.
 
-- Turn a small requirement into a reviewed plan with explicit acceptance criteria.
-- Understand the roles of App chats/sessions, modes, model effort, and CLI; recognize
-  that Fusion and other features depend on availability and policy.
-- Inspect a bounded implementation and verify behavior with focused tests.
-- Use diffs, Copilot feedback, and human judgment together during code review.
-- Distinguish ordinary CI from agentic automation and identify the permissions,
-  inputs, and outputs that need checking before automation runs.
+**Our goal today:** take one small cart behavior from idea to a reviewed pull request
+and see where Copilot helps at each step, while you stay in charge of the decisions.
+The loop we'll follow:
+
+> **plan -> build -> test -> review in the terminal -> pull request review -> CI**
+
+Along the way you'll see how to choose the right Copilot surface, mode, and effort for
+a task, and why each step ends with a person checking the result.
+
+---
 
 ## Before you start
 
@@ -44,58 +51,39 @@ Ahead of the workshop you were asked to:
 - Make sure you can clone a repository, create a branch, and push changes.
 - Confirm you can access the Copilot App and CLI.
 
-If something isn't ready, you can still follow every demonstration and catch up on
-the hands-on parts afterward.
-
 **Getting the files:** your facilitator will share this guide, `SESSION-1.md`.
-Upload it to [To be confirmed in dry-run: where participants add the file]. If a
-section needs another file, it will be shared on its own with instructions for
-where to add it. Any other setup is described in the section that needs it.
+Upload it to [where participants add the file]. If a section needs another file, it
+will be shared on its own with instructions for where to add it.
 
-**The scenario:** we'll work in Octocat Supply, a small demo store app with a
-TypeScript API and a React frontend. Its shopping cart isn't built yet (Add to Cart
-is a placeholder), so we'll use one small cart behavior to walk through planning,
-building, testing, review, and CI.
+If something isn't ready, you can still follow every demonstration and catch up on
+the hands-on part afterward.
 
-## 90-minute agenda
+---
 
-Elapsed times are measured from 10:30 am ET. Optional follow-up is not extra live time.
+## Agenda
 
-| Elapsed minutes | Duration | Segment | Delivery |
-| --- | --- | --- | --- |
-| 0-5 | 5 | S1: Welcome, readiness, and surface map | Watch the demonstration |
-| 5-15 | 10 | S2: App and Fusion | Watch the demonstration |
-| 15-32 | 17 | S3: Feature development | Watch the demonstration |
-| 32-40 | 8 | S4: Testing | Watch the demonstration |
-| 40-48 | 8 | S5: CLI | Watch the demonstration |
-| 48-55 | 7 | S6: PR and code review | Watch the demonstration |
-| 55-60 | 5 | S7: CI and agentic automation | Watch the demonstration |
-| 60-80 | 20 | S8: Guided participant exercise | Try it yourself |
-| 80-90 | 10 | S9: Questions, takeaways, and resources | Try it yourself |
-| **Total** | **90** | | |
+| Time | Section | Format |
+| --- | --- | --- |
+| 0-5 | S1. Welcome and surface map | ▶️ Example |
+| 5-15 | S2. Copilot App: sessions, modes, and Fusion | ▶️ Example |
+| 15-32 | S3. Feature development | ▶️ Example |
+| 32-40 | S4. Testing | ▶️ Example |
+| 40-48 | S5. Copilot CLI | ▶️ Example |
+| 48-55 | S6. Pull request and code review | ▶️ Example |
+| 55-60 | S7. CI and agentic automation | ▶️ Example |
+| 60-80 | S8. Your turn | 🧑‍💻 Try it yourself |
+| 80-90 | S9. Wrap-up | Discussion |
 
-## Session sections
+---
 
-The order below is the participant path. Draft slots are deliberately unfinished.
-For every section, exact steps/prompts, observed output, measured time, and a fallback
-are explicitly reserved in the separate facilitator rehearsal record below.
+## S1. Welcome and surface map (~5 min)
 
-### S1. Welcome, readiness, and surface map (0-5)
+**Scenario:** A teammate asks, "Which Copilot should I use for this?" There are
+several places Copilot shows up. Before we build anything, we'll map each one to a
+step in the work.
 
-**Intended outcome:** Know the single scenario, the participation labels, and which
-surface to use without assuming everyone has the same experience.
-
-**Delivery:** Watch the demonstration.
-
-**Selected scope:** Quick access/readiness check; map App, CLI, VS Code, and GitHub
-review/CI to the same development workflow. Avoid installation troubleshooting in
-the live five-minute introduction.
-
-#### Key ideas
-
-Today we follow **one small change** in Octocat Supply from idea to a reviewed pull
-request. Copilot isn't one tool in one place. It's one agent experience across several
-surfaces, and you pick the surface that fits where you're working.
+**Background:** Copilot isn't one tool in one place. It's one agent experience across
+several surfaces, and you pick the one that fits where you're working.
 
 | Surface | What it is | Common uses | Where we use it today |
 | --- | --- | --- | --- |
@@ -106,41 +94,44 @@ surfaces, and you pick the surface that fits where you're working.
 
 How they fit one workflow:
 
-**Plan** (App plan mode, CLI plan mode, VS Code `/plan`) -> **Implement** (App
-session, VS Code, CLI) -> **Test** (the agent runs tests in its session; you check
-the results) -> **Review** (Copilot code review plus a person) -> **CI** (Actions
-checks; agentic workflows for jobs that need reasoning).
+**Plan** (App plan mode, CLI plan mode, VS Code `/plan`) -> **Build** (App session,
+VS Code, CLI) -> **Test** (the agent runs tests; you check the results) -> **Review**
+(Copilot code review plus a person) -> **CI** (Actions checks; agentic workflows for
+jobs that need reasoning).
 
-#### Things people often get wrong
+**Watch out for:**
 
 - **Surfaces don't share uncommitted work by magic.** The App and CLI only see the
   same changes when they open the same checkout or worktree.
 - **What you see depends on policy.** The App and CLI have separate admin policies,
   and some models or features may be turned off for your organization. If something
   is missing, use another surface; don't troubleshoot it during the session.
-- **Copilot doesn't replace the review.** Every stage still ends with a person
+- **Copilot doesn't replace the review.** Every step still ends with a person
   checking the result.
+
+#### ▶️ Example (follow along)
+
+> Quick readiness check. Can you:
+>
+> 1. Sign in to GitHub and see Copilot as available?
+> 2. Open the Copilot App, or start `copilot` in a terminal?
+>
+> If not, say so in the chat now and keep watching. We'll sort out individual setups
+> after the session rather than hold up the group.
 
 **Learn more:** [Copilot App](https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app),
 [Copilot CLI](https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli),
 [VS Code agents](https://code.visualstudio.com/docs/agents/overview),
 [Copilot code review](https://docs.github.com/copilot/concepts/code-review).
 
-**Draft activity:** [To be rehearsed: see S1 presenter beats in the facilitator notes.]
+---
 
-### S2. App and Fusion (5-15)
+## S2. Copilot App: sessions, modes, and Fusion (~10 min)
 
-**Intended outcome:** Understand chat versus a repository session, worktree isolation,
-and choosing a mode/model effort appropriate to the task.
+**Scenario:** We've been asked to start on the cart. Before writing code, we want to
+think it through and agree on a plan, without Copilot changing files yet.
 
-**Delivery:** Watch the demonstration.
-
-**Selected scope:** App surfaces, chat/session, modes, and Fusion/model effort using
-the Octocat requirement. Fusion is policy-dependent; no specific availability,
-menu label, or model option is promised. Borrow App techniques, not the Academy's
-Pulse Analytics launch-readiness scenario or its dashboards/artifacts.
-
-#### Key ideas
+**Background:**
 
 **1. Chats are for thinking, sessions are for doing.**
 
@@ -195,7 +186,7 @@ decide whether the agent asks before running tools: *Ask every time*, *Assisted*
 parallel worktrees; start a session from an issue; review a diff and open a PR;
 follow CI and review feedback through to merge.
 
-#### Things people often get wrong
+**Watch out for:**
 
 - "The chat changed my files." It can't. Only sessions work in a repository.
 - "Autopilot is the advanced mode, so it's better." It's riskier for unclear tasks.
@@ -204,129 +195,296 @@ follow CI and review feedback through to merge.
 - "Worktree changes are on my main branch." They're on the worktree's own branch
   until you merge them.
 
+#### ▶️ Example (follow along)
+
+> 1. In a **chat**, ask a scoping question. Notice there's no plan, workspace, or
+>    file changes:
+>
+>    ```text
+>    We have a store app whose Add to Cart button only shows a pop-up. What's the smallest useful first cart behavior to build, and what questions should we answer before planning it?
+>    ```
+>
+> 2. Start a **session** on the Octocat Supply repository. Choose *This computer* and
+>    a *New worktree*, select **Plan** mode, and pick Copilot Fusion at **Standard**
+>    or **High** effort.
+>
+> 3. Send the planning prompt (draft, to be rehearsed):
+>
+>    ```text
+>    Read frontend/src/components/entity/product/Products.tsx and look at docs/design/cart.png. Propose a short plan for [selected cart slice], with acceptance criteria and the files you'd change. Don't change any files yet.
+>    ```
+>
+> 4. Review the plan in the side panel. Hover over the effort label to see which
+>    models ran. **Don't approve it yet**; S3 continues from here.
+
 **Learn more:** [Agent sessions](https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions),
 [Copilot Fusion](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/models/copilot-fusion),
 [Auto model selection](https://docs.github.com/en/copilot/concepts/models/auto-model-selection).
 
-**Draft activity:** [To be rehearsed: see S2 presenter beats in the facilitator notes.]
+---
 
-### S3. Feature development (15-32)
+## S3. Feature development (~17 min)
 
-**Intended outcome:** See a small requirement become a reviewed plan, a bounded
-implementation, and independently checked behavior.
+**Scenario:** The plan from S2 is on screen. Now we tighten it into clear acceptance
+criteria, approve it, and let Copilot build one small cart behavior.
 
-**Delivery:** Watch the demonstration.
+**Background:** The quality of what Copilot builds depends on how clearly you define
+"done." Good acceptance criteria are specific and checkable, for example "the badge
+shows the number of items" rather than "the cart works." Review the plan before
+approving it: check the files it will touch, what it will leave alone, and how it will
+prove the behavior works. Keep the slice small enough to review in a few minutes.
 
-**Selected scope:** Inspect `docs/design/cart.png`; clarify acceptance criteria,
-review the plan, implement only the selected slice, and inspect the result.
-Use a starter only after it has actually been prepared and verified.
-Full cart construction is not the live task.
+**Common uses:** turning a ticket into a plan; building UI from a design mockup;
+adding one behavior to an existing page; getting a second opinion on an approach
+before you commit to it.
 
-**Draft activity:** [To be rehearsed: final slice, starter reference, prompt, approval
-boundary, implementation steps, and manual behavior checks.]
+#### ▶️ Example (follow along)
 
-### S4. Testing (32-40)
+> 1. Tighten the plan (draft, to be rehearsed):
+>
+>    ```text
+>    Before I approve: list the acceptance criteria as numbered, checkable statements. Confirm which files you will and won't change, and keep the change limited to [selected cart slice].
+>    ```
+>
+> 2. Approve the plan and let the session implement it. Watch the to-do list and
+>    changes in the side panel.
+>
+> 3. Run the app and check each acceptance criterion yourself in the browser at
+>    [local front-end URL].
 
-**Intended outcome:** Connect acceptance criteria to focused tests and distinguish an
-agent's success claim from observed execution.
+**What to notice:** the plan is a contract you can edit before any code changes; and
+the agent saying "done" isn't the same as you seeing it work.
 
-**Delivery:** Watch the demonstration.
+---
 
-**Selected scope:** Generate a few tests for the chosen behavior, execute/repair them,
-then verify independently. The source lab's product/supplier API coverage exercise
-is a technique reference, not a frontend instruction. No repository-wide 80% target
-is promised in this session.
+## S4. Testing (~8 min)
 
-**Draft activity:** [To be rehearsed: frontend test approach, exact file targets,
-non-watching command, assertions, and independent verification.]
+**Scenario:** The behavior works when we click through it. Now we want proof that
+keeps working after the next change.
 
-### S5. CLI (40-48)
+**Background:** Tests turn acceptance criteria into evidence that runs every time.
+Ask for a few **focused** tests tied to the criteria, not a large suite. Then run
+them yourself: an agent reporting "all tests pass" is a claim; output you've seen is
+evidence. When a test fails, decide whether the code or the test is wrong before
+asking for a fix.
 
-**Intended outcome:** Review the same change and make a small documentation update
-from a terminal without losing repository context.
+**Common uses:** writing tests for new behavior; covering edge cases you'd otherwise
+skip; explaining and repairing a failing test; checking that a test actually fails
+when the behavior breaks.
 
-**Delivery:** Watch the demonstration.
+#### ▶️ Example (follow along)
 
-**Selected scope:** Confirm actual worktree path and branch, then demonstrate `/diff`,
-`/review`, and a short update to an existing document. Exact command availability
-and behavior must be rehearsed. Do not create the CLI lab's separate Task Manager
-API or reuse its Express/Zod/Jest setup paths.
+> 1. Ask for focused tests (draft, to be rehearsed):
+>
+>    ```text
+>    Write focused tests for [selected cart slice], one per acceptance criterion. Follow the existing test style in this repo. Run them with [test command] and show me the output.
+>    ```
+>
+> 2. Run the tests yourself and read the result:
+>
+>    ```bash
+>    [test command]
+>    ```
+>
+> 3. Optional check: temporarily break the behavior and confirm a test fails.
 
-**Draft activity:** [To be rehearsed: worktree/branch identity check, CLI commands,
-documentation target, and bounded documentation prompt.]
+**What to notice:** tests map one-to-one to the acceptance criteria, and you
+confirmed the result yourself.
 
-### S6. PR and code review (48-55)
+---
 
-**Intended outcome:** Assess the change against requirements using the diff,
-Copilot findings, human validation, and check evidence.
+## S5. Copilot CLI (~8 min)
 
-**Delivery:** Watch the demonstration.
+**Scenario:** You prefer the terminal, or you're already there. We'll review the
+same change and update a short document without switching tools.
 
-**Selected scope:** PR creation/context and diff review for the same cart slice;
-validate findings before accepting fixes. Distinguish CLI/local review from GitHub
-Copilot PR review. Prepared review/check results are a pending fallback, not an
-existing deliverable. No merge or Agent Merge is needed.
+**Background:** The CLI is the same Copilot agent in your terminal. It only sees the
+changes in the folder you start it in, so first confirm you're in the **same worktree
+and branch** as the App session. `/diff` shows what changed, `/review` asks Copilot to
+review it, and plain prompts can make small changes such as a documentation update.
 
-**Draft activity:** [To be rehearsed: reviewed PR description, permitted review
-surface, real findings/check evidence, and human acceptance decision.]
+**Common uses:** reviewing local changes before you commit; quick fixes without
+opening an editor; Git tasks such as summarizing history; one-shot scripted prompts
+with `copilot -p`.
 
-### S7. CI and agentic automation (55-60)
+#### ▶️ Example (follow along)
 
-**Intended outcome:** Explain when fixed CI steps suffice and when a guarded agentic
-task is appropriate.
+> 1. Open the same worktree and confirm where you are:
+>
+>    ```bash
+>    cd [worktree path]
+>    git status --short --branch
+>    copilot
+>    ```
+>
+> 2. Inside the CLI, review the change:
+>
+>    ```text
+>    /diff
+>    /review
+>    ```
+>
+> 3. Make a small documentation update (draft, to be rehearsed):
+>
+>    ```text
+>    Update [existing doc] with 3-5 lines describing [selected cart slice] and how to test it. Change only that file.
+>    ```
 
-**Delivery:** Watch the demonstration.
+**What to notice:** the CLI saw the App's changes because it opened the same
+worktree, and `/review` here is a local review, separate from the pull request
+review in S6.
 
-**Selected scope:** A prepared source/result walkthrough, not live provisioning.
-Compare ordinary `.github/workflows/ci.yml` with
-`.github/workflows/auto-analyze-failures.md` and its generated
-`.github/workflows/auto-analyze-failures.lock.yml`; both agentic files are present.
-Inspect failure triggers, read permissions, permitted outputs, and human oversight.
-The source permits issue creation and selected Copilot assignment; these are real
-side effects, not merely logging. Source exists; a verified result example does not.
+---
 
-According to the linked Academy lab, App automations require an eligible
-private/internal repository, write access, and organization permission; cloud runs
-also require the cloud agent. Eligibility here is unverified. Repository workflows
-have their own execution/secret preflight. Do not activate either automation surface,
-compile/dispatch workflows, provision secrets, change policy, or run
-`test-auto-analysis.yml` (an intentional-failure workflow).
+## S6. Pull request and code review (~7 min)
 
-**Draft activity:** [To be rehearsed: bounded source excerpts, guardrail explanation,
-and an approved recorded result or explicitly source-only fallback.]
+**Scenario:** The change is built, tested, and documented. Now it needs to be reviewed
+and accepted by the team.
 
-### S8. Guided participant exercise (60-80)
+**Background:** A good pull request says **what** changed, **why**, and **how it was
+tested**. Copilot code review gives a fast first pass on the PR and can suggest fixes,
+but it doesn't decide. For each finding, a person decides whether to accept it, reject
+it, or follow up, and says why. CI checks run alongside the review as separate
+evidence. Green checks alone aren't approval.
 
-**Intended outcome:** Practice the same requirement-plan-change-test-review loop on
-one manageable follow-up.
+**Common uses:** drafting a PR description from the diff; getting a first-pass review
+before a teammate looks; checking a change against the original requirement; applying
+a suggested fix in a couple of clicks.
 
-**Delivery:** Try it yourself.
+#### ▶️ Example (follow along)
 
-**Selected scope:** Candidate final-item removal/empty-cart behavior described above.
-Stay in one available surface; work from the confirmed participant starter, not a
-guessed branch or another person's uncommitted files. Scope and acceptance criteria
-are provisional until the cart foundation and tests are rehearsed.
+> 1. Draft the PR description (draft, to be rehearsed):
+>
+>    ```text
+>    Draft a pull request description for this change: what changed, why, how it was tested (include the test command and result), and anything a reviewer should look at closely.
+>    ```
+>
+> 2. Open the PR and request a **Copilot code review**.
+>
+> 3. Go through each finding: accept, reject, or follow up, with a one-line reason.
+>    Check the CI results on the PR.
 
-**Draft activity:** [To be rehearsed: distributed starter/checkpoint reference,
-participant steps, prompt, acceptance checks, and recovery path.]
+**What to notice:** you made the final call on every finding; Copilot gave the first
+pass.
 
-**Optional follow-up:** After the session, explain one additional edge case and how
-you would test it; no additional implementation is required during live time.
+---
 
-### S9. Questions, takeaways, and resources (80-90)
+## S7. CI and agentic automation (~5 min)
 
-**Intended outcome:** Explain what was verified, what still needs human judgment, and
-where to find the original materials.
+**Scenario:** A build fails at 2 a.m. Should a fixed script handle it, or an agent
+that can reason about the failure?
 
-**Delivery:** Try it yourself (discussion and reflection).
+**Background:** Ordinary CI runs **fixed steps** every time (install, build, test,
+lint). That's right when the job is predictable. **Agentic workflows** run a Copilot
+agent inside GitHub Actions for jobs that need judgment, such as analyzing a failure
+or triaging an issue. Because an agent can act, check four things before it runs:
 
-**Selected scope:** Questions, one practical takeaway per participant, and the
-source/adaptation map. Separate observed behavior from untested ideas.
+1. **Trigger:** what starts it.
+2. **Permissions:** what it can read and write.
+3. **Outputs:** what it's allowed to create, such as an issue or a comment.
+4. **Human oversight:** who reviews what it produces.
 
-**Draft activity:** [To be rehearsed: closing prompts, concise recap, and resource handoff.]
+**Common uses:** CI failure analysis; issue triage; documentation updates; daily
+repository summaries.
 
-**Optional follow-up:** Explore the original labs at your own pace rather than
-trying to complete their full scenarios during this workshop.
+#### ▶️ Example (follow along)
+
+> We'll read these files together. We won't run them.
+>
+> ```text
+> .github/workflows/ci.yml                        # ordinary CI: fixed steps
+> .github/workflows/auto-analyze-failures.md      # agentic workflow: instructions and guardrails
+> .github/workflows/auto-analyze-failures.lock.yml  # the generated workflow that actually runs
+> ```
+>
+> In the agentic file, find the trigger, the permissions, and the outputs it's
+> allowed to create.
+
+**What to notice:** the agentic workflow's guardrails are written down and reviewable,
+and its outputs, such as creating an issue, are real actions, not just logging.
+
+**Learn more:** [GitHub Agentic Workflows](https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available/).
+
+---
+
+## S8. Your turn (~20 min)
+
+**Scenario:** The first cart behavior is in place. A follow-up request comes in:
+when a shopper removes the last item, show an empty-cart message with a **Continue
+shopping** action, and keep the cart badge correct.
+
+**Background:** You'll run the same loop on your own: plan, build, test, review. Stay
+in one surface (App, CLI, or VS Code) rather than switching mid-exercise.
+
+#### 🧑‍💻 Try it yourself
+
+> 1. Start from the participant starter: [starter repository or branch].
+>
+> 2. In **Plan** mode, plan the change (draft, to be rehearsed):
+>
+>    ```text
+>    Plan this change: when the last item is removed from the cart, show an empty-cart message with a "Continue shopping" action that returns to the products page, and keep the cart badge count correct. List numbered acceptance criteria and the files you'd change. Don't change files until I approve.
+>    ```
+>
+> 3. Review and approve the plan, then let Copilot implement it.
+>
+> 4. Ask for focused tests, one per acceptance criterion, and run them yourself.
+>
+> 5. Review the diff (`/diff` and `/review` in the CLI, or the changes view in the
+>    App or VS Code).
+>
+> **Done when** removing the last item shows the empty-cart message, **Continue
+> shopping** returns to the products page, the badge shows the right count, and
+> you've seen the focused tests pass yourself.
+
+**Optional follow-up:** after the session, pick one more edge case and write down how
+you'd test it.
+
+---
+
+## S9. Wrap-up (~10 min)
+
+### Putting it together
+
+Today we took one small change through **plan -> build -> test -> review -> CI**.
+Copilot helped at every step, but the value came from clear acceptance criteria, a
+reviewed plan, tests you ran yourself, and review decisions you made. The point isn't
+just generating code faster; it's combining clear guidance with real verification so
+the speed is backed by evidence.
+
+### Reflect
+
+- Which step would save you the most time on your current work?
+- Where would Plan mode have caught a misunderstanding earlier on a recent task?
+- What would you want a human to check before trusting an agentic workflow?
+
+### Key takeaways
+
+| Topic | Takeaway |
+| --- | --- |
+| Surfaces | Same agent, different places; pick the one that fits where you're working. |
+| Chats vs sessions | Chat to think, session to change files. |
+| Modes and effort | Plan first; match effort to the task. |
+| Feature development | Clear acceptance criteria drive a good result. |
+| Testing | An agent's "tests pass" is a claim; output you've seen is evidence. |
+| CLI | Same agent in the terminal; same worktree, same changes. |
+| Code review | Copilot gives the first pass; a person owns the decision. |
+| Agentic automation | Check trigger, permissions, outputs, and oversight before it runs. |
+
+### Next steps
+
+- **This week:** use Plan mode for one real task before writing any code.
+- **This month:** add Copilot code review to your team's PR routine.
+- **Later:** look for one CI job that needs judgment and check whether an agentic
+  workflow fits.
+
+### Resources
+
+- [GitHub Copilot docs](https://docs.github.com/en/copilot)
+- The original Copilot Academy labs are listed in the source map at the end of this
+  guide. Explore them at your own pace.
+
+---
 
 ## Facilitator preparation and dry-run record - not participant instructions
 
@@ -367,7 +525,7 @@ must open the same worktree and branch as the App demo.
 
 ### S1-S2 presenter beats (draft, un-rehearsed)
 
-Read from the S1/S2 **Key ideas**; use these beats for timing and what to show.
+Read from the S1/S2 **Background**; use these beats for timing and what to show.
 Features and labels were checked against GitHub docs and changelog on November 22,
 2026 (Copilot Fusion GA: October 28, 2026). Re-check the live UI in the dry-run.
 
@@ -378,7 +536,7 @@ Features and labels were checked against GitHub docs and changelog on November 2
 | 0:00-1:00 | Welcome; the one-change scenario; the three participation labels |
 | 1:00-2:00 | Quick readiness check (show of hands or chat): Copilot access, App, CLI. No fixing live |
 | 2:00-4:30 | Surface table, then the plan -> CI line; name where each appears today |
-| 4:30-5:00 | "Things people get wrong"; hand off to the App |
+| 4:30-5:00 | "Watch out for"; hand off to the App |
 
 **S2 (10 min)**
 
@@ -390,11 +548,7 @@ Features and labels were checked against GitHub docs and changelog on November 2
 | 6:00-9:00 | Pick Fusion (Standard or High); send the planning prompt below; show the plan in the side panel; hover over the effort label to show the models used. Don't approve yet; S3 continues from here |
 | 9:00-10:00 | Recap: chat vs session, mode vs permissions, effort matches the task |
 
-**Draft planning prompt (to be rehearsed):**
-
-> Read `frontend/src/components/entity/product/Products.tsx` and look at
-> `docs/design/cart.png`. Propose a short plan for [selected cart slice], with
-> acceptance criteria and the files you'd change. Don't change any files yet.
+The chat and planning prompts are in the S2 **Example**.
 
 **Fallbacks:**
 
@@ -404,6 +558,33 @@ Features and labels were checked against GitHub docs and changelog on November 2
 
 **Not yet verified:** exact plan-approval button wording, whether Rogers' policy
 enables High/Max, and how long the planning prompt takes.
+
+### Section notes and guardrails (facilitator only)
+
+- **S2:** Fusion is policy-dependent; don't promise a specific menu label or model.
+  Borrow App techniques, not the Academy's Pulse Analytics scenario or artifacts.
+- **S3:** Full cart construction is not the live task. Use a starter only after it
+  has been prepared and verified. Fill in the slice and local URL after rehearsal.
+- **S4:** The source lab's product/supplier API coverage exercise is a technique
+  reference, not a frontend instruction; no repository-wide 80% target. Frontend
+  test setup and the non-watching test command are not yet established.
+- **S5:** Confirm the actual worktree path and branch. Rehearse `/diff` and `/review`
+  availability. Don't create the CLI lab's Task Manager API or reuse its paths.
+- **S6:** Distinguish CLI/local review from Copilot PR review. A prepared
+  review/check-result fallback is pending. No merge or Agent Merge needed. In the
+  dry-run repo, `build-and-publish.yml` and `copilot-setup-steps.yml` fail before
+  any job runs; expect red checks on the PR.
+- **S7:** Source walkthrough only. The source permits issue creation and selected
+  Copilot assignment (real side effects). Per the Academy lab, App automations need
+  an eligible private/internal repo, write access, and org permission; cloud runs
+  need the cloud agent. Eligibility here is unverified. Don't activate automations,
+  compile/dispatch workflows, provision secrets, change policy, or run
+  `test-auto-analysis.yml` (an intentional-failure workflow). The generated
+  failure-analysis workflow expects `COPILOT_GITHUB_TOKEN`.
+- **S8:** Scope and acceptance criteria are provisional until the cart foundation
+  and tests are rehearsed. Participants must work from the confirmed starter, not a
+  guessed branch or someone else's uncommitted files.
+- **S9:** Separate observed behavior from untested ideas in the recap.
 
 ### Per-section rehearsal slots
 
