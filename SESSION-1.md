@@ -237,10 +237,16 @@ follow CI and review feedback through to merge.
 >    files. It can only answer in general terms, because it isn't connected to the
 >    repository.
 >
-> 3. Send the planning prompt (draft, to be rehearsed):
+> 3. Copilot's answer will probably suggest a bigger slice than we have time for,
+>    and list some open questions. For this workshop we've already picked the
+>    slice so everyone builds the same thing: **Add to Cart puts the selected
+>    quantity in a shared cart, and the navigation bar shows the cart's item
+>    count.** The cart page, saving the cart across refreshes, and checkout wait
+>    until later. In the same session, send the planning prompt (draft, to be
+>    rehearsed):
 >
 >    ```text
->    Read frontend/src/components/entity/product/Products.tsx and look at docs/design/cart.png. Propose a short plan for [selected cart slice], with acceptance criteria and the files you'd change. Don't change any files yet.
+>    Let's scope the first slice down: Add to Cart adds the selected quantity to a shared client-side cart, adding the same product again increases its quantity, and Navigation shows the total item count. Out of scope for now: a cart page, persistence across refreshes, guest vs. signed-in carts, and checkout. Propose a short plan with numbered acceptance criteria and the files you'd change. Don't change any files yet.
 >    ```
 >
 > 4. Review the plan in the side panel. Hover over the effort label to see which
@@ -272,7 +278,7 @@ before you commit to it.
 > 1. Tighten the plan (draft, to be rehearsed):
 >
 >    ```text
->    Before I approve: list the acceptance criteria as numbered, checkable statements. Confirm which files you will and won't change, and keep the change limited to [selected cart slice].
+>    Before I approve: list the acceptance criteria as numbered, checkable statements. Confirm which files you will and won't change, and keep the change limited to the cart slice (Add to Cart updates a shared cart; Navigation shows the item count).
 >    ```
 >
 > 2. Approve the plan and let the session implement it. Watch the to-do list and
@@ -306,7 +312,7 @@ when the behavior breaks.
 > 1. Ask for focused tests (draft, to be rehearsed):
 >
 >    ```text
->    Write focused tests for [selected cart slice], one per acceptance criterion. Follow the existing test style in this repo. Run them with [test command] and show me the output.
+>    Write focused tests for the cart slice (Add to Cart updates a shared cart; Navigation shows the item count), one per acceptance criterion. Follow the existing test style in this repo. Run them with [test command] and show me the output.
 >    ```
 >
 > 2. Run the tests yourself and read the result:
@@ -356,7 +362,7 @@ with `copilot -p`.
 > 3. Make a small documentation update (draft, to be rehearsed):
 >
 >    ```text
->    Update [existing doc] with 3-5 lines describing [selected cart slice] and how to test it. Change only that file.
+>    Update [existing doc] with 3-5 lines describing the cart slice (Add to Cart updates a shared cart; Navigation shows the item count) and how to test it. Change only that file.
 >    ```
 
 **What to notice:** the CLI saw the App's changes because it opened the same
@@ -602,7 +608,7 @@ enables High/Max, and how long the planning prompt takes.
 - **S2:** Fusion is policy-dependent; don't promise a specific menu label or model.
   Borrow App techniques, not the Academy's Pulse Analytics scenario or artifacts.
 - **S3:** Full cart construction is not the live task. Use a starter only after it
-  has been prepared and verified. Fill in the slice and local URL after rehearsal.
+  has been prepared and verified. Slice is fixed in S2 step 3 (shared cart + Navigation count); the cart page is a candidate S8 extension. Fill in the local URL after rehearsal.
 - **S4:** The source lab's product/supplier API coverage exercise is a technique
   reference, not a frontend instruction; no repository-wide 80% target. Frontend
   test setup and the non-watching test command are not yet established.
@@ -632,7 +638,7 @@ troubleshooting here; publish only confirmed participant steps into the sections
 | Section | Exact steps/prompts | Observed output/evidence | Measured time vs. budget | Fallback and trigger |
 | --- | --- | --- | --- | --- |
 | S1 | Draft beats above; [to be rehearsed] | [Not observed] | [Not measured] / 5 min | [To be rehearsed: access-limited participation] |
-| S2 | Draft beats and prompt above; [to be rehearsed] | [Not observed] | [Not measured] / 10 min | [To be rehearsed: available mode without Fusion] |
+| S2 | Step 2 scoping prompt run (2026-11-22); step 3 [to be rehearsed] | Step 2: Copilot proposed shared cart state, a Navigation count, and a cart view with edit/remove. It asked about persistence, guest vs. signed-in carts, re-adding the same product, and discounted totals. It also noted there's no cart link or route yet. That's too big for S3, so step 3 fixes a smaller slice. | [Not measured] / 10 min | [To be rehearsed: available mode without Fusion] |
 | S3 | [To be rehearsed] | [Not observed] | [Not measured] / 17 min | [To be rehearsed: prepared diff/result; not yet created] |
 | S4 | [To be rehearsed] | [Not observed] | [Not measured] / 8 min | [To be rehearsed: focused test evidence; not yet captured] |
 | S5 | [To be rehearsed] | [Not observed] | [Not measured] / 8 min | [To be rehearsed: same-checkout diff/doc walkthrough] |
