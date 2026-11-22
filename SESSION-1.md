@@ -95,9 +95,6 @@ affecting anyone else.
 5. **Add your repository to the Copilot App:** in the sidebar next to **Sessions**,
    click **+**, choose **Open local folder**, and select the folder you cloned.
 
-If something isn't working, follow along on screen and come back to the setup after
-the session.
-
 ---
 
 ## Agenda
