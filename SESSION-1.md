@@ -91,7 +91,42 @@ surface to use without assuming everyone has the same experience.
 review/CI to the same development workflow. Avoid installation troubleshooting in
 the live five-minute introduction.
 
-**Draft activity:** [To be rehearsed: opening explanation and readiness check.]
+#### Key ideas
+
+Today we follow **one small change** in Octocat Supply from idea to a reviewed pull
+request. Copilot isn't one tool in one place. It's one agent experience across several
+surfaces, and you pick the surface that fits where you're working.
+
+| Surface | What it is | Common uses | Where we use it today |
+| --- | --- | --- | --- |
+| **Copilot App** (desktop) | Runs agent sessions on your repositories, several in parallel, each on its own branch or worktree. Triage issues, review changes, and follow PRs and CI in one place. | Planning and running tasks; parallel work; starting from an issue; PR follow-through | S2, S3, S6 |
+| **Copilot CLI** | The same agent in your terminal: interactive (`copilot`) or one-shot (`copilot -p "..."`). Shift+Tab switches into plan mode. | Quick terminal changes; Git work; `/review` and `/diff`; scripted prompts | S5 |
+| **VS Code** | Inline suggestions as you type, the Chat view (an agent beside your editor, terminal, and tests), and the Agents window for coordinating sessions. | Hands-on editing; focused edits; debugging with tests | Your option in S8 |
+| **GitHub.com** | Copilot code review on PRs, Copilot in the cloud for background work, and agentic workflows in GitHub Actions. | PR review; background tasks; CI automation | S6, S7 |
+
+How they fit one workflow:
+
+**Plan** (App plan mode, CLI plan mode, VS Code `/plan`) -> **Implement** (App
+session, VS Code, CLI) -> **Test** (the agent runs tests in its session; you check
+the results) -> **Review** (Copilot code review plus a person) -> **CI** (Actions
+checks; agentic workflows for jobs that need reasoning).
+
+#### Things people often get wrong
+
+- **Surfaces don't share uncommitted work by magic.** The App and CLI only see the
+  same changes when they open the same checkout or worktree.
+- **What you see depends on policy.** The App and CLI have separate admin policies,
+  and some models or features may be turned off for your organization. If something
+  is missing, use another surface; don't troubleshoot it during the session.
+- **Copilot doesn't replace the review.** Every stage still ends with a person
+  checking the result.
+
+**Learn more:** [Copilot App](https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app),
+[Copilot CLI](https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli),
+[VS Code agents](https://code.visualstudio.com/docs/agents/overview),
+[Copilot code review](https://docs.github.com/copilot/concepts/code-review).
+
+**Draft activity:** [To be rehearsed: see S1 presenter beats in the facilitator notes.]
 
 ### S2. App and Fusion (5-15)
 
@@ -105,7 +140,75 @@ the Octocat requirement. Fusion is policy-dependent; no specific availability,
 menu label, or model option is promised. Borrow App techniques, not the Academy's
 Pulse Analytics launch-readiness scenario or its dashboards/artifacts.
 
-**Draft activity:** [To be rehearsed: available App controls and bounded planning prompt.]
+#### Key ideas
+
+**1. Chats are for thinking, sessions are for doing.**
+
+- A **chat** is conversation only. It can't see your files, so your prompt has to
+  include the facts it needs. Use it to brainstorm, scope, or draft wording.
+- A **session** runs an agent against a repository or folder. It can read and change
+  files and run commands. The side panel shows its file tree, plan, to-do list, and
+  changes.
+
+**2. Choose where the session runs before you start.**
+
+- **Environment:** *This computer* (local) or *Cloud* (a GitHub-hosted sandbox you
+  can steer from any device).
+- **Workspace:** *New worktree* is an isolated copy of the repository on its own
+  branch. It's safe for parallel work, and its changes stay there until you review
+  and open a PR. *Current checkout* works directly in your existing files: simpler,
+  but one task at a time.
+
+**3. Modes control how much the agent does before checking in.**
+
+| Mode | What happens | Use it when |
+| --- | --- | --- |
+| **Interactive** | Suggests changes and waits for you | You want tight, step-by-step control |
+| **Plan** | Writes a plan; nothing runs until you approve it | You want to agree on scope and approach first (today's default) |
+| **Autopilot** | Works on its own: writes code, runs tests, iterates | The task is small and well defined |
+
+You can switch modes at any time. **Mode is separate from tool permissions**, which
+decide whether the agent asks before running tools: *Ask every time*, *Assisted*
+(a model approves requests it judges safe and asks about the rest), or *Approve all*.
+
+**4. Model and effort: Copilot Fusion.**
+
+- **Fusion is a router, not a model.** For each prompt it chooses the models and a
+  pattern:
+  - **Single:** one model does the task.
+  - **Cascade:** an efficient model drafts; a judge accepts it or escalates.
+  - **Critique:** several models review a draft before it's revised.
+- **You choose the effort level:**
+  - **Standard** for everyday work.
+  - **High** for substantial, multi-file work.
+  - **Max** for the deepest reasoning.
+
+  Higher effort is slower and uses more AI credits. Hover over the effort label
+  under a response to see which models ran.
+- **Practical rule:** start at Standard, move to High for planning across several
+  files, and use Max sparingly.
+- **Availability depends on your plan and your organization's model policies.** If
+  you see **Auto** instead of Fusion, that surface uses Auto model selection; its
+  tiers (Efficiency, Balance, Intelligence) are not Fusion effort levels.
+
+**Common uses of the App:** plan a change before touching code; run two tasks in
+parallel worktrees; start a session from an issue; review a diff and open a PR;
+follow CI and review feedback through to merge.
+
+#### Things people often get wrong
+
+- "The chat changed my files." It can't. Only sessions work in a repository.
+- "Autopilot is the advanced mode, so it's better." It's riskier for unclear tasks.
+  Plan first, then decide.
+- "Max is always best." It costs more and takes longer. Match effort to the task.
+- "Worktree changes are on my main branch." They're on the worktree's own branch
+  until you merge them.
+
+**Learn more:** [Agent sessions](https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions),
+[Copilot Fusion](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/models/copilot-fusion),
+[Auto model selection](https://docs.github.com/en/copilot/concepts/models/auto-model-selection).
+
+**Draft activity:** [To be rehearsed: see S2 presenter beats in the facilitator notes.]
 
 ### S3. Feature development (15-32)
 
@@ -262,6 +365,46 @@ must open the same worktree and branch as the App demo.
   empty-cart message and **Continue shopping**, keeps the badge consistent, with
   focused tests. Starter and checkpoint are not yet prepared.
 
+### S1-S2 presenter beats (draft, un-rehearsed)
+
+Read from the S1/S2 **Key ideas**; use these beats for timing and what to show.
+Features and labels were checked against GitHub docs and changelog on November 22,
+2026 (Copilot Fusion GA: October 28, 2026). Re-check the live UI in the dry-run.
+
+**S1 (5 min)**
+
+| Time | Say / show |
+| --- | --- |
+| 0:00-1:00 | Welcome; the one-change scenario; the three participation labels |
+| 1:00-2:00 | Quick readiness check (show of hands or chat): Copilot access, App, CLI. No fixing live |
+| 2:00-4:30 | Surface table, then the plan -> CI line; name where each appears today |
+| 4:30-5:00 | "Things people get wrong"; hand off to the App |
+
+**S2 (10 min)**
+
+| Time | Say / show |
+| --- | --- |
+| 0:00-2:00 | Open a **chat**; ask it a scoping question. Point out there's no plan, workspace, or file changes |
+| 2:00-4:00 | Start a **session** on the Octocat repo; show the Environment and Workspace choices; explain worktree vs current checkout |
+| 4:00-6:00 | Show the three modes and the tool-permission options; pick **Plan** and *Ask every time* or *Assisted* |
+| 6:00-9:00 | Pick Fusion (Standard or High); send the planning prompt below; show the plan in the side panel; hover over the effort label to show the models used. Don't approve yet; S3 continues from here |
+| 9:00-10:00 | Recap: chat vs session, mode vs permissions, effort matches the task |
+
+**Draft planning prompt (to be rehearsed):**
+
+> Read `frontend/src/components/entity/product/Products.tsx` and look at
+> `docs/design/cart.png`. Propose a short plan for [selected cart slice], with
+> acceptance criteria and the files you'd change. Don't change any files yet.
+
+**Fallbacks:**
+
+- Fusion isn't shown: use whatever model picker is available and say why.
+- High or Max is missing: use Standard (the plan or a model policy limits it).
+- The App is unavailable: show plan mode in the CLI (Shift+Tab).
+
+**Not yet verified:** exact plan-approval button wording, whether Rogers' policy
+enables High/Max, and how long the planning prompt takes.
+
 ### Per-section rehearsal slots
 
 Replace each pending cell with actual evidence, not predicted results. Keep detailed
@@ -269,8 +412,8 @@ troubleshooting here; publish only confirmed participant steps into the sections
 
 | Section | Exact steps/prompts | Observed output/evidence | Measured time vs. budget | Fallback and trigger |
 | --- | --- | --- | --- | --- |
-| S1 | [To be rehearsed] | [Not observed] | [Not measured] / 5 min | [To be rehearsed: access-limited participation] |
-| S2 | [To be rehearsed] | [Not observed] | [Not measured] / 10 min | [To be rehearsed: available mode without Fusion] |
+| S1 | Draft beats above; [to be rehearsed] | [Not observed] | [Not measured] / 5 min | [To be rehearsed: access-limited participation] |
+| S2 | Draft beats and prompt above; [to be rehearsed] | [Not observed] | [Not measured] / 10 min | [To be rehearsed: available mode without Fusion] |
 | S3 | [To be rehearsed] | [Not observed] | [Not measured] / 17 min | [To be rehearsed: prepared diff/result; not yet created] |
 | S4 | [To be rehearsed] | [Not observed] | [Not measured] / 8 min | [To be rehearsed: focused test evidence; not yet captured] |
 | S5 | [To be rehearsed] | [Not observed] | [Not measured] / 8 min | [To be rehearsed: same-checkout diff/doc walkthrough] |
