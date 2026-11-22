@@ -33,101 +33,29 @@ marks guided practice in your chosen surface. **Optional follow-up** is outside 
 - Distinguish ordinary CI from agentic automation and identify the permissions,
   inputs, and outputs that need checking before automation runs.
 
-## Repository, setup, and known starting state
+## Before you start
 
-### Source provenance and snapshot scope
+Ahead of the workshop you were asked to:
 
-Workshop repository: <https://github.com/rko26-tt-shiny-dollop/test-repo-rogers>.
+- Confirm you have GitHub and GitHub Copilot access (request it through the Rogers
+  GitHub Access Portal if needed).
+- Install and update VS Code and the GitHub Copilot extension.
+- Confirm Git is installed and you can authenticate with GitHub.
+- Make sure you can clone a repository, create a branch, and push changes.
+- Confirm you can access the Copilot App and CLI.
 
-Source: <https://github.com/copilot-academy/octocat_supply>, default branch `main`,
-snapshot inspected and published on November 22, 2026:
+If something isn't ready, you can still follow every demonstration and catch up on
+the hands-on parts afterward.
 
-`0ac787d24a029e49ec97c3ca0441eec0ec85a00d`
+**Getting the files:** your facilitator will share this guide, `SESSION-1.md`.
+Upload it to [To be confirmed in dry-run: where participants add the file]. If a
+section needs another file, it will be shared on its own with instructions for
+where to add it. Any other setup is described in the section that needs it.
 
-Pinned source: <https://github.com/copilot-academy/octocat_supply/commit/0ac787d24a029e49ec97c3ca0441eec0ec85a00d>.
-
-This repository's first commit is a **single-commit snapshot** of that upstream
-revision: its file tree is identical to upstream `main` at `0ac787d`, without the
-upstream commit history. All upstream tracked files are included unchanged,
-including `api/ca.key` (upstream demo key material) and every `.github/workflows/`
-definition, exactly as upstream ships them. The upstream README and attribution are
-unchanged. The only addition is this guide, `SESSION-1.md`, in a separate commit.
-
-The snapshot has **no standalone LICENSE, COPYING, or NOTICE file**.
-`api/package.json` declares `"license": "MIT"`; that metadata and existing attribution
-are preserved. This does not establish a repository-wide license for every asset.
-Confirm upstream licensing/redistribution expectations before broader distribution;
-no new license grant is invented here.
-
-### Actual layout
-
-| Path | What is present |
-| --- | --- |
-| `api/` | TypeScript/Express API, SQLite persistence, migrations and seed data; its own `package.json` and `package-lock.json` |
-| `frontend/` | React/Vite/Tailwind UI; its own `package.json` and `package-lock.json` |
-| `frontend/src/components/entity/product/Products.tsx` | Product list and quantity controls; Add to Cart is still a TODO/alert |
-| `frontend/src/App.tsx`, `frontend/src/components/Navigation.tsx` | Existing routes/navigation; no implemented cart route or cart badge |
-| `frontend/tests/` | Existing Playwright end-to-end test and product-navigation feature description |
-| `docs/design/cart.png` | Cart design image, present; using it in the demo still needs rehearsal |
-| `docs/`, `Makefile` | Source architecture/build documentation and per-component commands |
-| `.github/` | Instructions, prompts, agents, skills, hooks, actions, and workflow definitions; import is not an instruction to run them |
-| `.devcontainer/`, `.vscode/`, `docker-compose.yml`, `infra/` | Environment/editor/container/deployment definitions; not provisioned or launched |
-
-There is **no root `package.json`**. Do not assume root npm workspace commands work.
-Use the actual component manifests and inspected Makefile rather than generic
-template instructions.
-
-### Participant readiness: requested, not verified
-
-Before the workshop, participants were asked to have GitHub/Copilot access,
-updated VS Code and its Copilot extension, Git and authentication, clone/branch/push
-capability, and App/CLI access. Receipt of that request is not proof of readiness.
-Repository access, runtime startup, and permitted surfaces still need confirmation.
-
-The presenter will use App and CLI; VS Code remains an available participant surface.
-Choose one approved surface for guided practice rather than switching repeatedly.
-The CLI demonstration must open the **same actual worktree and branch** as the App
-demo. A different clone/worktree does not share uncommitted changes.
-
-### Setup references - inspected, not yet run
-
-Use Node.js **24 as the rehearsal baseline**: the imported CI and devcontainer select
-24. Older source prose mentions 18+ or 22+ and is not a verified compatibility promise.
-Local setup also needs npm and Make; SQLite's native dependency may require platform
-build support. Docker is optional, not required for the selected local path.
-
-| Source command/configuration | Meaning and current status |
-| --- | --- |
-| `make install` | Installs dependencies separately in `api/` and `frontend/`; not run |
-| `make build` | Builds both components; not run |
-| `make dev` | Starts both development services; API development startup initializes/seeds SQLite; not run |
-| `api/package.json`: `npm run test:coverage` from `api/` | API Vitest coverage command; not run and not a cart/frontend test command |
-| `frontend/package.json`: `npm run test:e2e` from `frontend/` | Playwright command; browser installation and working runtime remain unverified |
-| API default `3000`; Vite `5137` | Source-configured local ports, not confirmed running endpoints |
-
-These are source references, **not a copy-and-run rehearsal sequence**. Do not run
-setup, expose ports, or change permissions just to follow this draft. The facilitator
-will replace placeholders with the smallest confirmed setup path after rehearsal.
-In particular, `make test`/`make test-frontend` expect a frontend `test` script that
-is absent. Frontend Vitest dependencies exist, but no frontend unit-test script or
-Vitest setup has been established for this workshop.
-
-### Proposed development throughline
-
-**Recommendation, not a validated scenario:** demonstrate a small shopping-cart
-behavior on a prepared starter, not an entire cart implementation live.
-
-Candidate participant follow-up: removing the final item displays an empty-cart
-message and a **Continue shopping** action, keeps the badge consistent, and is
-supported by focused tests and review. The final slice, starter, and participant
-checkpoint will be chosen during rehearsal.
-
-**Starting-state incompatibility:** the imported source does not yet provide the
-cart needed for that follow-up. `Products.tsx` only alerts and resets the selected
-quantity; the app has no cart route, cart state provider, or navigation badge.
-The existing "No products found" state is product search, not an empty cart.
-No cart implementation, starter branch, prepared PR, or checkpoint was created
-during repository preparation.
+**The scenario:** we'll work in Octocat Supply, a small demo store app with a
+TypeScript API and a React frontend. Its shopping cart isn't built yet (Add to Cart
+is a placeholder), so we'll use one small cart behavior to walk through planning,
+building, testing, review, and CI.
 
 ## 90-minute agenda
 
@@ -303,6 +231,36 @@ trying to complete their full scenarios during this workshop.
 application started, test suite run, workflow dispatched, automation enabled,
 starter/checkpoint created, or PR opened as part of this preparation. Publishing
 the snapshot may trigger push-event workflows; such runs are not rehearsal evidence.
+
+### Repository and setup reference (facilitator only)
+
+**Provenance:** the dry-run repository
+<https://github.com/rko26-tt-shiny-dollop/test-repo-rogers> starts from a
+single-commit snapshot of
+[copilot-academy/octocat_supply@`0ac787d`](https://github.com/copilot-academy/octocat_supply/commit/0ac787d24a029e49ec97c3ca0441eec0ec85a00d):
+the full upstream tree unchanged (including `api/ca.key` and all `.github/workflows/`),
+without upstream history, plus this guide in a separate commit. There is no standalone
+LICENSE/NOTICE file; `api/package.json` declares MIT. Confirm redistribution
+expectations before broader distribution. Update this note for the session repository.
+
+**Readiness:** the pre-workshop checklist was requested, not verified. Repository
+access, runtime startup, and permitted surfaces still need confirmation. The CLI demo
+must open the same worktree and branch as the App demo.
+
+**Layout and setup notes (inspected, not run):**
+
+- `api/` (Express, SQLite) and `frontend/` (React/Vite/Tailwind) each have their own
+  `package.json`; there is **no root `package.json`**.
+- Node.js 24 is the baseline (CI and devcontainer); also needs npm and Make.
+- `make install`, `make build`, `make dev` (dev startup seeds SQLite); API tests:
+  `npm run test:coverage` in `api/`; Playwright: `npm run test:e2e` in `frontend/`.
+  Default ports: API `3000`, Vite `5137`. `make test` expects a missing frontend
+  `test` script.
+- Cart starting state: `Products.tsx` Add to Cart only alerts; no cart route, state,
+  or badge. Design reference: `docs/design/cart.png`.
+- Proposed participant slice (not validated): removing the final item shows an
+  empty-cart message and **Continue shopping**, keeps the badge consistent, with
+  focused tests. Starter and checkpoint are not yet prepared.
 
 ### Per-section rehearsal slots
 
