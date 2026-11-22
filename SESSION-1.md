@@ -93,7 +93,9 @@ affecting anyone else.
    **Ctrl+C**.
 
 5. **Add your repository to the Copilot App:** in the sidebar next to **Sessions**,
-   click **+**, choose **Open local folder**, and select the folder you cloned.
+   click **+**, choose **Open local folder**, and select the folder you cloned. Use
+   **Open local folder**, not a GitHub repository. The sidebar shows it as
+   `[parent folder]/[repo folder]`.
 
 ---
 
@@ -194,21 +196,38 @@ model selection; pick what's available.
 
 > 1. In the App sidebar, hover over your repository and click **+** (**New
 >    session**). Choose **This computer**, **New worktree**, **Plan** mode, and
->    Copilot Fusion at **High** effort.
+>    Copilot Fusion at **High** effort. If the mode shows **Interactive**, switch
+>    it to **Plan**.
 >
-> 2. Send (draft, to be rehearsed):
+> 2. Send:
 >
 >    ```text
->    I need to build a shopping cart for this app. Use the design in docs/design/cart.png as a reference. Requirements:
->    - Add to Cart on the products page adds the selected quantity to the cart instead of showing a pop-up
->    - A cart icon in the navigation bar shows the number of items and links to the cart page
->    - A cart page lists items with quantity, price, and totals, and lets me change quantities and remove items
->    - Out of scope: checkout, payment, and saving the cart between page refreshes
+>    I need to build a shopping cart for this app. Use the design in docs/design/cart.png as a reference.
+>
+>    Requirements:
+>    -Add to Cart on the products page adds the selected quantity to the cart instead of showing a pop-up
+>    -A cart icon in the navigation bar shows the total number of units and links to the cart page
+>    -The cart page lists items with quantity, unit price, and line total
+>    -I can change quantities (applied immediately, no Update Cart button) and remove items
+>    -Use each product's discounted price when it has one
+>    -Show only a subtotal and grand total; no discount, shipping, or coupon rows
+>
+>    Out of scope:
+>    -Checkout (hide the checkout button) and payment
+>    -Saving the cart between page refreshes
+>    -An empty-cart message
+>
+>    Constraints:
+>    -Don't write or change any tests
+>    -Keep the Product type where it is; no lazy loading
+>    -Run builds with "cd frontend && npm run build"
+>    -Don't commit
+>
 >    Explore the existing code, ask me any clarifying questions, then propose a plan with numbered acceptance criteria and the files you'll change. Don't change any files yet.
 >    ```
 >
-> 3. While it plans, notice it reading the actual files (`Products.tsx`,
->    `Navigation.tsx`, the router) and opening `docs/design/cart.png`. Hover over the effort label under the response to
+> 3. Copilot may ask some clarifying questions. While it plans, notice it reading
+>    the actual files (`Products.tsx`, `Navigation.tsx`, the router) and opening `docs/design/cart.png`. Hover over the effort label under the response to
 >    see which models ran.
 >
 > 4. Read the plan in the side panel. **Don't approve it yet**; S3 starts here.
@@ -238,30 +257,26 @@ rather than guessing the fix.
 
 #### 🧑‍💻 Hands-on
 
-> 1. **Answer Copilot's clarifying questions.** If you're unsure, use (draft, to be
->    rehearsed):
->
->    ```text
->    Use standard e-commerce patterns. Adding the same product again increases its quantity. Use the price shown on the products page, including any discount. No checkout, payment, or saving between refreshes. Keep shipping and coupons out of scope.
->    ```
+> 1. **Answer Copilot's clarifying questions.** If you're unsure, pick the
+>    **(Recommended)** option.
 >
 > 2. **Check the plan.** Make sure it lists numbered acceptance criteria and the files
 >    it will change, and stays inside the requirements. Ask for changes if needed.
 >
-> 3. **Approve the plan** and let the session build. Watch the to-do list and
->    changes in the side panel.
+> 3. **Approve the plan when asked** and let the session build. Watch the to-do
+>    list and changes in the side panel.
 >
-> 4. **Run the app from the session's worktree** and check each acceptance
->    criterion in the browser at <http://localhost:5137>:
+> 4. **Run the app from the session's worktree:**
+>    - If `make dev` is still running from setup, stop it (**Ctrl+C**) so the
+>      ports are free.
+>    - Ask the session:
 >
->    ```bash
->    cd [session worktree path]
->    make dev
->    ```
+>      ```text
+>      Start the app with make dev.
+>      ```
 >
->    Find the worktree path in the session's side panel [exact location to be
->    confirmed in rehearsal]. If `make dev` is still running from setup, stop it
->    first so the ports are free.
+>    - Open <http://localhost:5137> in the App's **Browser** tab and check each
+>      acceptance criterion. Review the code in the **Changes** tab.
 >
 > 5. **If something's off,** tell the session what you saw, for example:
 >
@@ -269,8 +284,13 @@ rather than guessing the fix.
 >    When I click Add to Cart with quantity 3, the cart icon still shows 0. Please fix it.
 >    ```
 >
-> **Done when** Add to Cart updates the cart icon count, the icon opens the cart
-> page, and you can change quantities and remove items on that page.
+> **Done when:**
+> - Add to Cart adds the selected quantity with no pop-up, and the cart icon shows
+>   the total units
+> - The cart icon opens the cart page, which lists each item with unit price
+>   (discounted where applicable), quantity, and line total
+> - Changing a quantity or removing an item updates the totals and the icon
+> - The order summary shows only a subtotal and grand total
 
 If your build gets stuck, describe the symptom to the session. If it's still stuck,
 follow along on screen through S4.
