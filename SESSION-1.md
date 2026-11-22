@@ -321,10 +321,10 @@ setup (Vitest and React Testing Library) and a sample test,
 >
 >    ```text
 >    Write focused frontend tests for the cart, one per acceptance criterion from the plan. Follow the style of frontend/src/components/Navigation.test.tsx. At minimum, cover:
->    - adding a product updates the cart count
->    - adding the same product again increases its quantity
->    - changing a quantity updates the totals
->    - removing an item removes it from the cart
+>    -adding a product updates the cart count
+>    -adding the same product again increases its quantity
+>    -changing a quantity updates the totals
+>    -removing an item removes it from the cart
 >    Run them with npm test in the frontend folder and fix any failures. Show me the final output.
 >    ```
 >
