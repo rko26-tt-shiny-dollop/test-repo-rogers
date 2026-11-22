@@ -227,8 +227,8 @@ model selection; pick what's available.
 >    ```
 >
 > 3. While it plans, notice it reading `Products.tsx`, `Navigation.tsx`, and the
->    router, and opening `docs/design/cart.png`. Hover over the effort label under
->    the response to see which models ran.
+>    router, and opening `docs/design/cart.png`. Below the response, see which model
+>    Copilot Fusion chose. Hover over **ⓘ** to see the AI credits used.
 >
 > 4. **Don't approve the plan yet**; that's S3.
 
