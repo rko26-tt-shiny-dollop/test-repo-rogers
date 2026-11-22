@@ -55,6 +55,27 @@ Ahead of the workshop you were asked to:
 Upload it to [where participants add the file]. If a section needs another file, it
 will be shared on its own with instructions for where to add it.
 
+### Set up your copy of the code (~5 min, before S2)
+
+You'll work in **your own copy** of the Octocat Supply code on GitHub, cloned to your
+computer. Don't use the original `copilot-academy/octocat_supply` repository: you
+can't push branches or open pull requests there.
+
+1. Clone your copy of the workshop repository and note where it lands:
+
+   ```bash
+   git clone [your workshop repository URL]
+   cd [repository folder]
+   git status --short --branch
+   ```
+
+2. Add it to the Copilot App: in the sidebar, next to **Sessions**, click **+**, then
+   under "Start session in" choose **Open local folder** and select the folder you
+   just cloned.
+
+The repository now appears in the sidebar. You'll start sessions from it in S2, and
+the CLI (S5) and VS Code can use the same folder.
+
 If something isn't ready, pair with a neighbor or follow on screen for now, and
 we'll get you set up after the session.
 
@@ -200,8 +221,8 @@ follow CI and review feedback through to merge.
 
 #### ▶️ Follow along
 
-> 1. Start a **session** on the Octocat Supply repository: in the sidebar, hover over
->    the repository and click **+** (**New session**). Choose *This computer* and a
+> 1. Start a **session** on **your copy** of the repository (added in *Set up your copy
+>    of the code*): in the sidebar, hover over it and click **+** (**New session**). Choose *This computer* and a
 >    *New worktree*, select **Plan** mode, and pick Copilot Fusion at **Standard** or
 >    **High** effort.
 >
@@ -569,6 +590,14 @@ The scoping and planning prompts are in the S2 **Follow along** steps.
 enables High/Max, and how long the planning prompt takes.
 
 ### Section notes and guardrails (facilitator only)
+
+- **Repository setup:** Recommended path is a local clone of each participant's own
+  copy, added with **Open local folder**, because S3-S4 run the app and tests on
+  `localhost`, S5's CLI must open the same folder, and S6 pushes a branch for a PR.
+  A cloud session can't serve the app on the participant's `localhost`. The App's
+  **Clone repository** option is an alternative. Decide before the session whether
+  participants each get their own repository (template or fork) or push branches to
+  one shared repository, and fill in the URL. Verify the menu labels in the dry-run.
 
 - **S2:** Fusion is policy-dependent; don't promise a specific menu label or model.
   Borrow App techniques, not the Academy's Pulse Analytics scenario or artifacts.
