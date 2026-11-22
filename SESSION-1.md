@@ -133,13 +133,15 @@ think it through and agree on a plan, without Copilot changing files yet.
 
 **Background:**
 
-**1. Chats are for thinking, sessions are for doing.**
+**1. Chats for general questions, sessions for work on your code.**
 
-- A **chat** is conversation only. It can't see your files, so your prompt has to
-  include the facts it needs. Use it to brainstorm, scope, or draft wording.
-- A **session** runs an agent against a repository or folder. It can read and change
-  files and run commands. The side panel shows its file tree, plan, to-do list, and
-  changes.
+- A **chat** isn't connected to a repository. It knows what you type and any files
+  you attach, but it won't look through your codebase, show a plan in the side panel,
+  or change files. Use it for general questions, brainstorming, or drafting wording.
+- A **session** is started from a repository or folder you've added to the App. Its
+  agent can look through the code on its own, change files, and run commands. The
+  side panel shows its file tree, plan, to-do list, and changes. Use a session
+  whenever the answer depends on your actual code.
 
 **2. Choose where the session runs before you start.**
 
@@ -188,7 +190,8 @@ follow CI and review feedback through to merge.
 
 **Watch out for:**
 
-- "The chat changed my files." It can't. Only sessions work in a repository.
+- "The chat knows my codebase." It only knows what you type or attach. Use a session
+  when the answer depends on the code.
 - "Autopilot is the advanced mode, so it's better." It's riskier for unclear tasks.
   Plan first, then decide.
 - "Max is always best." It costs more and takes longer. Match effort to the task.
@@ -197,16 +200,21 @@ follow CI and review feedback through to merge.
 
 #### ▶️ Follow along
 
-> 1. In a **chat**, ask a scoping question. Notice there's no plan, workspace, or
->    file changes:
+> 1. Start a **session** on the Octocat Supply repository: in the sidebar, hover over
+>    the repository and click **+** (**New session**). Choose *This computer* and a
+>    *New worktree*, select **Plan** mode, and pick Copilot Fusion at **Standard** or
+>    **High** effort.
+>
+> 2. Ask a scoping question. Because this is a session, Copilot looks at the actual
+>    code to answer (draft, to be rehearsed):
 >
 >    ```text
->    We have a store app whose Add to Cart button only shows a pop-up. What's the smallest useful first cart behavior to build, and what questions should we answer before planning it?
+>    Look at frontend/src/components/entity/product/Products.tsx, frontend/src/components/Navigation.tsx, and docs/design/cart.png. Add to Cart currently only shows a pop-up. What's the smallest useful first cart behavior to build, and what questions should we answer before planning it?
 >    ```
 >
-> 2. Start a **session** on the Octocat Supply repository. Choose *This computer* and
->    a *New worktree*, select **Plan** mode, and pick Copilot Fusion at **Standard**
->    or **High** effort.
+>    *Optional comparison:* ask a similar question in a new chat without attaching
+>    files. It can only answer in general terms, because it isn't connected to the
+>    repository.
 >
 > 3. Send the planning prompt (draft, to be rehearsed):
 >
@@ -463,7 +471,7 @@ the speed is backed by evidence.
 | Topic | Takeaway |
 | --- | --- |
 | Surfaces | Same agent, different places; pick the one that fits where you're working. |
-| Chats vs sessions | Chat to think, session to change files. |
+| Chats vs sessions | Chat for general questions; session when the answer depends on your code. |
 | Modes and effort | Plan first; match effort to the task. |
 | Feature development | Clear acceptance criteria drive a good result. |
 | Testing | An agent's "tests pass" is a claim; output you've seen is evidence. |
@@ -542,13 +550,14 @@ Features and labels were checked against GitHub docs and changelog on November 2
 
 | Time | Say / show |
 | --- | --- |
-| 0:00-2:00 | Open a **chat**; ask it a scoping question. Point out there's no plan, workspace, or file changes |
-| 2:00-4:00 | Start a **session** on the Octocat repo; show the Environment and Workspace choices; explain worktree vs current checkout |
-| 4:00-6:00 | Show the three modes and the tool-permission options; pick **Plan** and *Ask every time* or *Assisted* |
-| 6:00-9:00 | Pick Fusion (Standard or High); send the planning prompt below; show the plan in the side panel; hover over the effort label to show the models used. Don't approve yet; S3 continues from here |
+| 0:00-1:00 | Explain chat vs session (a chat only knows what you type or attach) |
+| 1:00-3:00 | Start a **session** from the repo (**+** New session); show the Environment and Workspace choices; explain worktree vs current checkout |
+| 3:00-5:00 | Show the three modes and the tool-permission options; pick **Plan** and *Ask every time* or *Assisted*; pick Fusion (Standard or High) |
+| 5:00-6:30 | Send the scoping prompt; point out Copilot reading the actual files. Optional: same question in a chat for contrast |
+| 6:30-9:00 | Send the planning prompt; show the plan in the side panel; hover over the effort label to show the models used. Don't approve yet; S3 continues from here |
 | 9:00-10:00 | Recap: chat vs session, mode vs permissions, effort matches the task |
 
-The chat and planning prompts are in the S2 **Follow along** steps.
+The scoping and planning prompts are in the S2 **Follow along** steps.
 
 **Fallbacks:**
 
