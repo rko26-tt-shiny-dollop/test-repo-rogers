@@ -95,8 +95,8 @@ affecting anyone else.
 5. **Add your repository to the Copilot App:** in the sidebar next to **Sessions**,
    click **+**, choose **Open local folder**, and select the folder you cloned.
 
-If something isn't working, tell us in the chat and pair with a neighbor so you can
-keep going. We'll sort out individual setups after the session.
+If something isn't working, follow along on screen and come back to the setup after
+the session.
 
 ---
 
@@ -149,7 +149,7 @@ one that fits where you're working.
 > 3. Your repository appears in the Copilot App sidebar.
 > 4. `copilot --version` works in a terminal.
 >
-> If any of these fail, say so in the chat and pair with a neighbor.
+> If any of these fail, follow along on screen for now.
 
 ---
 
@@ -276,8 +276,8 @@ rather than guessing the fix.
 > **Done when** Add to Cart updates the cart icon count, the icon opens the cart
 > page, and you can change quantities and remove items on that page.
 
-If your build gets stuck, tell us in the chat. Describe the symptom to the session,
-or pair with a neighbor and follow their screen through S4.
+If your build gets stuck, describe the symptom to the session. If it's still stuck,
+follow along on screen through S4.
 
 **What to notice:** the plan was a contract you checked before any code changed, and
 you confirmed the result yourself.
@@ -587,7 +587,7 @@ decisions you made.
       them.
 - [ ] Rehearse S2-S3 end to end in the sandbox and confirm the build fits in 20
       minutes. There is no prepared fallback cart; if a build stalls, participants
-      describe the symptom to the session or pair with a neighbor.
+      describe the symptom to the session or follow along on screen.
 - [ ] Confirm the S4 test command and timing.
 - [ ] Fill in all [bracketed] items: starter URL, worktree path location, Create PR
       label, and code review effort setting.
@@ -601,8 +601,9 @@ decisions you made.
   branch.
 - **S2:** if Fusion isn't shown, use the available model picker. If High is missing,
   use Standard. If the App is unavailable, plan in the CLI (Shift+Tab for plan mode).
-- **S3:** this is the longest live step. Watch for participants stuck on port
-  conflicts (`make dev` already running) or the wrong folder.
+- **S3:** this is the longest live step. The likely problems are port conflicts
+  (`make dev` already running) and running commands in the wrong folder; mention
+  both on screen before the build starts.
 - **S4:** if frontend tests prove too slow in rehearsal, decide then whether to
   narrow the test list or switch approach.
 - **S5:** confirm `/diff`, `/review`, and `copilot -p` piping behave as written.
