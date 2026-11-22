@@ -226,11 +226,11 @@ model selection; pick what's available.
 >    Explore the existing code, ask me any clarifying questions, then propose a plan with numbered acceptance criteria and the files you'll change. Don't change any files yet.
 >    ```
 >
-> 3. Copilot may ask some clarifying questions. While it plans, notice it reading
->    the actual files (`Products.tsx`, `Navigation.tsx`, the router) and opening `docs/design/cart.png`. Hover over the effort label under the response to
->    see which models ran.
+> 3. While it plans, notice it reading `Products.tsx`, `Navigation.tsx`, and the
+>    router, and opening `docs/design/cart.png`. Hover over the effort label under
+>    the response to see which models ran.
 >
-> 4. Read the plan in the side panel. **Don't approve it yet**; S3 starts here.
+> 4. **Don't approve the plan yet**; that's S3.
 
 **What to notice:** the session found the real starting point (the Add to Cart pop-up)
 on its own, because it's connected to your code.
