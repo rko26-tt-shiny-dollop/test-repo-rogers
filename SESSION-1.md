@@ -196,11 +196,10 @@ model selection; pick what's available.
 >    session**). Choose **This computer**, **New worktree**, **Plan** mode, and
 >    Copilot Fusion at **High** effort.
 >
-> 2. Attach `docs/design/cart.png` from your repository, then send (draft, to be
->    rehearsed):
+> 2. Send (draft, to be rehearsed):
 >
 >    ```text
->    I need to build a shopping cart for this app. Use the attached design as a reference. Requirements:
+>    I need to build a shopping cart for this app. Use the design in docs/design/cart.png as a reference. Requirements:
 >    - Add to Cart on the products page adds the selected quantity to the cart instead of showing a pop-up
 >    - A cart icon in the navigation bar shows the number of items and links to the cart page
 >    - A cart page lists items with quantity, price, and totals, and lets me change quantities and remove items
@@ -209,7 +208,7 @@ model selection; pick what's available.
 >    ```
 >
 > 3. While it plans, notice it reading the actual files (`Products.tsx`,
->    `Navigation.tsx`, the router). Hover over the effort label under the response to
+>    `Navigation.tsx`, the router) and opening `docs/design/cart.png`. Hover over the effort label under the response to
 >    see which models ran.
 >
 > 4. Read the plan in the side panel. **Don't approve it yet**; S3 starts here.
