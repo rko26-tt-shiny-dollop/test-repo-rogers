@@ -7,7 +7,7 @@
 >
 > - **Scenario & Background**: what we're doing and when you'd use it at work.
 > - **🧑‍💻 Hands-on**: the steps you run. In S1-S7 we do them together on screen;
->   in S8 you run the loop on your own.
+>   in S8 you work on your own.
 >
 > Prompts and commands are in code blocks so they're easy to copy. If you fall
 > behind, pick up at the next step; your results don't need to match the screen.
@@ -31,7 +31,7 @@ has a design for the cart page (`docs/design/cart.png`).
 using Copilot at each step while you make the decisions:
 
 > **plan -> build -> test -> review in the terminal -> pull request review -> CI ->
-> extend it yourself**
+> browser test**
 
 ---
 
@@ -110,7 +110,7 @@ affecting anyone else.
 | 43-51 | S5. Review and commit in the Copilot CLI | Review locally, commit, and push |
 | 51-61 | S6. Pull request and Copilot code review | Open a PR and act on review findings |
 | 61-67 | S7. Verify CI on your pull request | Read your checks, CI guardrails, and an agentic workflow |
-| 67-82 | S8. Extend the cart on your own | Run the whole loop yourself |
+| 67-82 | S8. Test your cart in a real browser from the CLI | Generate and run a Playwright test |
 | 82-90 | S9. Wrap-up | Reflect and plan next steps |
 
 ---
@@ -126,8 +126,8 @@ one that fits where you're working.
 | Surface | What it is | Where we use it today |
 | --- | --- | --- |
 | **Copilot App** (desktop) | Runs agent sessions on your repositories, each on its own branch or worktree. Plan, build, review changes, open PRs, and follow CI in one place. | S2, S3, S4, S6 |
-| **Copilot CLI** | The same agent in your terminal: interactive (`copilot`) or one-shot (`copilot -p "..."`). | S5 |
-| **VS Code** | Inline suggestions, Chat, and agent sessions beside your editor. | Your option in S8 |
+| **Copilot CLI** | The same agent in your terminal: interactive (`copilot`) or one-shot (`copilot -p "..."`). | S5, S8 |
+| **VS Code** | Inline suggestions, Chat, and agent sessions beside your editor. | Optional, if you prefer your editor |
 | **GitHub.com** | Copilot code review on pull requests, Actions, and agentic workflows. | S6, S7 |
 
 **Watch out for:**
@@ -607,39 +607,41 @@ person's call.
 
 ---
 
-## S8. Extend the cart on your own (~15 min)
+## S8. Test your cart in a real browser from the CLI (~15 min)
 
-**Scenario:** A follow-up request comes in: when the cart is empty, show a friendly
-message and a **Continue shopping** button that takes the shopper back to the
-products page.
+**Scenario:** Before the cart ships, QA wants an end-to-end test that clicks through
+it the way a shopper would.
 
-**Background:** You'll run the same loop on your own: plan, build, test, review. Use
-whichever surface you prefer (App, CLI, or VS Code), and stay in it for the whole
-exercise.
+**Background:** The repo already has Playwright set up (`frontend/playwright.config.ts`
+and `frontend/tests/e2e/`). From the CLI, Copilot can read your cart code, write a
+Playwright test, and run it in a real browser while you watch.
 
 #### 🧑‍💻 Hands-on
 
-> 1. Start from your cart branch: continue in your S3 session, or start a new session
->    on that branch.
+> 1. Make sure `make dev` is still running. In the terminal you used in S5, go to your
+>    cart worktree and start the CLI:
 >
-> 2. In **Plan** mode, plan the change (draft, to be rehearsed):
->
->    ```text
->    Plan this change: when the cart has no items, the cart page shows an empty-cart message and a "Continue shopping" button that goes to the products page. The cart icon count stays correct. List numbered acceptance criteria and the files you'll change. Don't change files until I approve.
+>    ```bash
+>    copilot
 >    ```
 >
-> 3. Review and approve the plan, then let Copilot build it.
+> 2. Ask for the test:
 >
-> 4. Ask for focused tests, one per acceptance criterion, and run them yourself.
+>    ```text
+>    The app is already running at http://localhost:5137. Write a Playwright test in frontend/tests/e2e/cart.spec.ts that adds two different products to the cart (one with quantity 2), opens the cart, and checks the cart icon count, each line total, and the cart total. Follow the style of frontend/tests/e2e/product-navigation.spec.ts. Then run it with --headed so I can watch, and report PASS or FAIL.
+>    ```
 >
-> 5. Review the diff (`/diff` and `/review` in the CLI, or the Changes view in the
->    App or VS Code), then commit and push.
+> 3. Approve its steps as it asks. Watch Chromium open and click through your cart.
 >
-> **Done when** an empty cart shows the message, **Continue shopping** goes to the
-> products page, the cart icon count is correct, and you've seen the tests pass.
+> 4. Open `cart.spec.ts` and read what it checks.
 >
-> **Finished early?** Add the change to your pull request and request another Copilot
-> code review.
+> **Done when** a browser window has run through your cart and Copilot reports **PASS**.
+>
+> **Finished early?** Commit `cart.spec.ts`, push, and check that it appears on your
+> pull request.
+
+**What to notice:** Copilot read your components to find the right selectors, wrote
+the test in the repo's existing style, and proved it in a real browser.
 
 ---
 
@@ -648,7 +650,7 @@ exercise.
 ### Putting it together
 
 Today you took a real feature through **plan -> build -> test -> review -> PR -> CI**,
-then ran the loop again on your own. Copilot helped at every step. The results came
+then added a browser test from the CLI. Copilot helped at every step. The results came
 from clear requirements, a plan you checked, tests you ran yourself, and review
 decisions you made.
 
@@ -776,8 +778,8 @@ Follow this guide during Session 1; use the originals for deeper exploration.
 | Source | Used in | What we use | What we leave out |
 | --- | --- | --- | --- |
 | [Getting work done with Copilot App](https://copilot-academy.github.io/labs/getting-work-done-with-copilot-app) | Setup, S1, S2, S7 | Adding a local folder; surfaces; chats vs sessions; modes; Fusion effort; App automations (optional) | The Pulse Analytics scenario, its artifacts, and canvases |
-| [Copilot CLI: Zero to Hero](https://copilot-academy.github.io/labs/copilot-cli-zero-to-hero) | S5 | `/diff`, `/review`, one-shot `copilot -p` with piped input, committing from the terminal | The Task Manager API build, installs and plugins, and `/delegate` |
-| [Feature development](https://copilot-academy.github.io/workshops/immersive-experience/feature_development) | S2, S3, S8 | Planning from `docs/design/cart.png`, answering clarifying questions, building and verifying the cart | Opening the PR straight after the build (we do it in S6, after tests and local review) |
+| [Copilot CLI: Zero to Hero](https://copilot-academy.github.io/labs/copilot-cli-zero-to-hero) | S5, S8 | `/diff`, `/review`, one-shot `copilot -p` with piped input, committing from the terminal, generating and running Playwright e2e tests | The Task Manager API build, installs and plugins, and `/delegate` |
+| [Feature development](https://copilot-academy.github.io/workshops/immersive-experience/feature_development) | S2, S3 | Planning from `docs/design/cart.png`, answering clarifying questions, building and verifying the cart | Opening the PR straight after the build (we do it in S6, after tests and local review) |
 | [Test coverage](https://copilot-academy.github.io/workshops/immersive-experience/test_coverage) | S4, S8 | Focused test generation with explicit criteria, self-healing test runs, verifying yourself | The API coverage target (80%); we test the frontend cart instead |
 | [Code review](https://copilot-academy.github.io/workshops/immersive-experience/code_review) | S6 | PR overview and files changed, Copilot code review, deciding on each finding, applying a fix | Agent Merge and auto-merge |
 | [Agentic workflows](https://copilot-academy.github.io/workshops/immersive-experience/agentic_workflows) | S7 | Choosing App automation vs agentic workflow; reading a workflow's trigger, permissions, and outputs | Creating, compiling, or running workflows live |
