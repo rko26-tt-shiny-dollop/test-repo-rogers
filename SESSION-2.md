@@ -135,7 +135,7 @@ docs, and tests. Copilot doesn't do all of it to your standards every time.
 > 3. When it finishes, send:
 >
 >    ```text
->    run make test-api
+>    run make test-api, then stop anything on ports 3000 and 5137 and run make dev from this worktree
 >    ```
 >
 >    Then open <http://localhost:3000/api-docs> and find the DeliveryVehicle endpoints.
