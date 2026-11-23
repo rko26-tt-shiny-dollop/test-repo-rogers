@@ -66,7 +66,31 @@ Prompt files don't run in the Copilot App. In the App, a skill does the same job
 
 ### Try it
 
-Start a new session in **Plan** mode, so nothing gets changed, and send:
+Pick a specific model, such as **Claude Sonnet 5**, rather than Fusion. Fusion can
+route each turn to a different model, so how closely the instructions are followed
+varies from run to run.
+
+**1. Repository-wide instructions.** Start a new session and send:
+
+```text
+Add this helper to the API:
+
+export function summarizeActivation(payload: any): any {
+  return {
+    count: payload.lines.length,
+    total: payload.lines.reduce((sum: any, line: any) => sum + line.price, 0),
+  };
+}
+```
+
+Then, in the same session:
+
+```text
+confirm you've followed copilot-instructions.md to shape implementation and explain how
+```
+
+**2. Scoped instructions.** Start a new session in **Plan** mode, so nothing gets
+changed, and send:
 
 ```text
 Review frontend/src/components/admin/AdminProducts.tsx. Don't change anything.
@@ -80,10 +104,15 @@ Now review api/src/routes/product.ts the same way.
 
 ### What to notice
 
-- Both reviews follow `.github/copilot-instructions.md`: findings in its escalation order
-  (security first), each with a "because" reason, quoting only the lines that need to change.
-- The first review also follows `.github/instructions/frontend.instructions.md`, such as
-  React Query instead of `useEffect` + `axios`, and splitting large components.
+- In the first session, check the code rather than Copilot's summary: the `any` types are
+  replaced with typed interfaces. That's `.github/copilot-instructions.md` ("no `any`
+  unless justified"), even though your prompt asked for `any`.
+- Copilot may not credit the instructions unless you ask, and it can credit the wrong
+  file. The follow-up gets it to name the rules it applied, which you can check against
+  the file.
+- In the second session, the first review follows
+  `.github/instructions/frontend.instructions.md`, such as React Query instead of
+  `useEffect` + `axios`, and splitting large components.
 - The second review swaps that for the API checklist, such as Swagger comments,
   parameterized SQL, and shared error classes. Each instructions file's `applyTo` decides
   which files it covers.
