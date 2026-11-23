@@ -328,11 +328,12 @@ setup (Vitest and React Testing Library) and a sample test,
 >    Run them with npm test in the frontend folder and fix any failures. Show me the final output.
 >    ```
 >
-> 3. **Run the tests yourself** in the session's worktree:
+> 3. **Run the tests yourself.** Open the **Terminal** tab in the session's side
+>    panel. It opens in the session's worktree. Then run:
 >
 >    ```bash
->    cd [session worktree path]/frontend
->    [npm test, to be confirmed in rehearsal]
+>    cd frontend
+>    npm test
 >    ```
 >
 > 4. **Optional:** temporarily break the cart (for example, stop Add to Cart from
