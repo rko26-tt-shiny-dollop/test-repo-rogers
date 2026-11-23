@@ -102,11 +102,10 @@ Observe the output. Were the custom scoped instructions followed?
 - In the first session, check the code rather than Copilot's summary: the `any` types are
   replaced with typed interfaces. That's `.github/copilot-instructions.md` ("no `any`
   unless justified"), even though your prompt asked for `any`.
-- Copilot may not credit the instructions unless you ask, and it can credit the wrong
-  file. The follow-up gets it to name the rules it applied, which you can check against
-  the file.
-- Instructions are always on; skills and agents load only when relevant or selected,
-  which keeps context small.
+- Copilot may not credit the instructions unless you ask. The follow-up gets it to name
+  the rules it applied, which you can check against the file.
+- `copilot-instructions.md` is always on. Scoped instructions load only when the prompt
+  involves files matching the `applyTo:` glob pattern in their frontmatter.
 
 ---
 
