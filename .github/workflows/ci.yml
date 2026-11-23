@@ -59,7 +59,7 @@ jobs:
         if-no-files-found: ignore
 
   frontend:
-    name: Frontend - Build and Lint
+    name: Frontend - Build, Test and Lint
     runs-on: ubuntu-latest
     
     steps:
@@ -88,6 +88,12 @@ jobs:
       if: always()
       working-directory: frontend
       run: npm run build
+
+    - name: Test Frontend
+      id: tests
+      if: always()
+      working-directory: frontend
+      run: npm test
 
   report:
     name: Generate Report
