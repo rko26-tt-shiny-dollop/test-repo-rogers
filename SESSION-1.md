@@ -336,10 +336,18 @@ setup (Vitest and React Testing Library) and a sample test,
 >    npm test
 >    ```
 >
-> 4. **Optional:** temporarily break the cart (for example, stop Add to Cart from
->    updating the count) and confirm a test fails. Then undo the change.
+> 4. **Check that the tests can fail.** Read Copilot's reply. Did it break the code
+>    on purpose to check that a test fails? If not, send:
 >
-> **Done when** you've seen the focused tests pass in your own terminal.
+>    ```text
+>    Check that the tests catch a real bug:
+>    -Temporarily make the cart ignore product discounts
+>    -Run npm test in the frontend folder and show me which tests fail
+>    -Then undo the change and run the tests again
+>    ```
+>
+> **Done when** you've seen the tests pass, and seen at least one fail when the code
+> was broken.
 
 **What to notice:** each test maps to an acceptance criterion, and the passing result
 is one you saw, not just one you were told about.
