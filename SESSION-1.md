@@ -12,7 +12,7 @@
 > Prompts and commands are in code blocks so they're easy to copy. If you fall
 > behind, pick up at the next step; your results don't need to match the screen.
 >
-> **Draft, rehearsal pending:** prompts, commands, and timings have not been run
+> **Draft, rehearsal pending:** prompts and commands have not been run
 > end to end yet. Items in [brackets] will be filled in after the dry-run.
 
 ---
@@ -53,7 +53,7 @@ node -v
 make -v
 ```
 
-### Set up your own repository (~10 min, before or at the start of S1)
+### Set up your own repository (before or at the start of S1)
 
 You'll work in **your own private copy** of the workshop starter. You need your own
 repository so you can push branches, open pull requests, and run CI without
@@ -101,21 +101,21 @@ affecting anyone else.
 
 ## Agenda
 
-| Time | Section | What you do |
-| --- | --- | --- |
-| 0-5 | S1. Welcome and surface map | Check your readiness |
-| 5-13 | S2. Plan the cart in the Copilot App | Start a session and get a plan |
-| 13-33 | S3. Build the cart | Approve the plan, build, and verify it |
-| 33-43 | S4. Test the cart | Generate and run focused tests |
-| 43-51 | S5. Review and commit in the Copilot CLI | Review locally, commit, and push |
-| 51-61 | S6. Pull request and Copilot code review | Open a PR and act on review findings |
-| 61-67 | S7. Verify CI on your pull request | Read your checks, CI guardrails, and an agentic workflow |
-| 67-82 | S8. Test your cart in a real browser from the CLI | Generate and run a Playwright test |
-| 82-90 | S9. Wrap-up | Reflect and plan next steps |
+| Section | What you do |
+| --- | --- |
+| S1. Welcome and surface map | Check your readiness |
+| S2. Plan the cart in the Copilot App | Start a session and get a plan |
+| S3. Build the cart | Approve the plan, build, and verify it |
+| S4. Test the cart | Generate and run focused tests |
+| S5. Review and commit in the Copilot CLI | Review locally, commit, and push |
+| S6. Pull request and Copilot code review | Open a PR and act on review findings |
+| S7. Verify CI on your pull request | Read your checks, CI guardrails, and an agentic workflow |
+| S8. Test your cart in a real browser from the CLI | Generate and run a Playwright test |
+| S9. Wrap-up | Reflect and plan next steps |
 
 ---
 
-## S1. Welcome and surface map (~5 min)
+## S1. Welcome and surface map
 
 **Scenario:** A teammate asks, "Which Copilot should I use for this?" Before we
 build, we'll map each Copilot surface to a step in today's work.
@@ -152,7 +152,7 @@ one that fits where you're working.
 
 ---
 
-## S2. Plan the cart in the Copilot App (~8 min)
+## S2. Plan the cart in the Copilot App
 
 **Scenario:** We've been asked to build the cart from the design. Before writing code,
 we want Copilot to look at the real code and the design and propose a plan, without
@@ -241,7 +241,7 @@ on its own, because it's connected to your code.
 
 ---
 
-## S3. Build the cart (~20 min)
+## S3. Build the cart
 
 **Scenario:** Copilot has a plan and probably some questions. We'll answer them,
 check the plan, approve it, and let Copilot build the cart. Then we verify it
@@ -300,7 +300,7 @@ you confirmed the result yourself.
 
 ---
 
-## S4. Test the cart (~10 min)
+## S4. Test the cart
 
 **Scenario:** The cart works when we click through it. Now we want proof that keeps
 working after the next change.
@@ -354,7 +354,7 @@ is one you saw, not just one you were told about.
 
 ---
 
-## S5. Review and commit in the Copilot CLI (~8 min)
+## S5. Review and commit in the Copilot CLI
 
 **Scenario:** You'd rather review and commit from the terminal. We'll open the same
 worktree in the CLI, review the change, write a commit message, and push the branch.
@@ -420,7 +420,7 @@ sees the code.
 
 ---
 
-## S6. Pull request and Copilot code review (~10 min)
+## S6. Pull request and Copilot code review
 
 **Scenario:** The cart is built, tested, reviewed locally, and pushed. Now it needs a
 pull request and a review before it's merged.
@@ -459,7 +459,7 @@ local review, and you still made the final call on every finding.
 
 ---
 
-## S7. Verify CI on your pull request (~6 min)
+## S7. Verify CI on your pull request
 
 **Scenario:** Before anyone merges the cart, you want proof it works. Copilot code
 review and a human reviewer can both miss things, so you'll check what CI ran on your
@@ -607,7 +607,7 @@ person's call.
 
 ---
 
-## S8. Test your cart in a real browser from the CLI (~15 min)
+## S8. Test your cart in a real browser from the CLI
 
 **Scenario:** Before the cart ships, QA wants an end-to-end test that clicks through
 it the way a shopper would.
@@ -645,7 +645,7 @@ the test in the repo's existing style, and proved it in a real browser.
 
 ---
 
-## S9. Wrap-up (~8 min)
+## S9. Wrap-up
 
 ### Putting it together
 
@@ -721,10 +721,10 @@ decisions you made.
       and fill in the starter URL in *Set up your own repository*.
 - [ ] Confirm participants can create private repositories and push the starter to
       them.
-- [ ] Rehearse S2-S3 end to end in the sandbox and confirm the build fits in 20
-      minutes. There is no prepared fallback cart; if a build stalls, participants
-      describe the symptom to the session or follow along on screen.
-- [ ] Confirm the S4 test command and timing.
+- [ ] Rehearse S2-S3 end to end in the sandbox. There is no prepared fallback cart;
+      if a build stalls, participants describe the symptom to the session or follow
+      along on screen.
+- [ ] Confirm the S4 test command.
 - [ ] Fill in all [bracketed] items: starter URL, worktree path location, Create PR
       label, and code review effort setting.
 - [ ] Confirm App, Fusion, CLI, and Copilot code review availability under Rogers'
@@ -755,18 +755,18 @@ decisions you made.
 
 Record only what was observed.
 
-| Section | Observed | Measured time vs budget | Notes |
-| --- | --- | --- | --- |
-| Setup | [Not observed] | [Not measured] / ~10 min | |
-| S1 | [Not observed] | [Not measured] / 5 min | |
-| S2 | Earlier scoping run (2026-11-22, previous guide's prompt): Copilot proposed shared cart state, a navigation count, and a cart view with edit/remove, and asked about persistence, guest vs signed-in carts, re-adding the same product, and discounted totals. It noted there was no cart route yet. This informed the S2 prompt and S3 answers. The current prompt is not yet rehearsed. | [Not measured] / 8 min | |
-| S3 | [Not observed] | [Not measured] / 20 min | |
-| S4 | [Not observed] | [Not measured] / 10 min | |
-| S5 | [Not observed] | [Not measured] / 8 min | |
-| S6 | [Not observed] | [Not measured] / 10 min | |
-| S7 | [Not observed] | [Not measured] / 6 min | |
-| S8 | [Not observed] | [Not measured] / 15 min | |
-| S9 | [Not observed] | [Not measured] / 8 min | |
+| Section | Observed | Notes |
+| --- | --- | --- |
+| Setup | [Not observed] | |
+| S1 | [Not observed] | |
+| S2 | Earlier scoping run (2026-11-22, previous guide's prompt): Copilot proposed shared cart state, a navigation count, and a cart view with edit/remove, and asked about persistence, guest vs signed-in carts, re-adding the same product, and discounted totals. It noted there was no cart route yet. This informed the S2 prompt and S3 answers. The current prompt is not yet rehearsed. | |
+| S3 | [Not observed] | |
+| S4 | [Not observed] | |
+| S5 | [Not observed] | |
+| S6 | [Not observed] | |
+| S7 | [Not observed] | |
+| S8 | [Not observed] | |
+| S9 | [Not observed] | |
 
 ---
 
