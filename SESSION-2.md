@@ -107,6 +107,13 @@ Observe the output. Were the custom scoped instructions followed?
 - `copilot-instructions.md` is always on. Scoped instructions load only when the prompt
   involves files matching the `applyTo:` glob pattern in their frontmatter.
 
+> **Note:** On GitHub.com (Copilot code review and the cloud agent), a scoped instructions
+> file is used only when a changed file matches its `applyTo:` pattern. Patterns start at
+> the repository root, so use `**/` to match a folder at any depth, for example
+> `**/database/migrations/**`. Open `.github/instructions/database.instructions.md` and
+> compare its `applyTo:` with where the migrations actually live. Would it apply in a
+> Copilot code review?
+
 ---
 
 ## S2. Skills
