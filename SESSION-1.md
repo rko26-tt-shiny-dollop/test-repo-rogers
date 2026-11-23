@@ -508,9 +508,25 @@ With these on, nobody can push straight to `main`, and a red CI run blocks the m
 - **Agentic workflow:** an agent that reads, reasons, and acts only through approved
   outputs, like `auto-analyze-failures.md`.
 
-When CI fails, an agentic workflow can step in. **Agentic automation** uses a Copilot
-agent for jobs that need judgment, such as analyzing a failure or
-triaging issues. There are two places it can run:
+**When CI fails, a separate agentic workflow can step in.** `auto-analyze-failures`
+isn't part of `ci.yml`. It's its own workflow, and GitHub starts it every time CI
+finishes:
+
+- **You write** `auto-analyze-failures.md`: settings at the top (trigger, permissions,
+  outputs) and plain-language instructions for the agent below.
+- **`gh aw compile`** turns it into `auto-analyze-failures.lock.yml`, the file GitHub
+  Actions actually runs. You compile once, when you create it or change its settings,
+  the same way someone wrote `ci.yml` once.
+- **Every time CI finishes,** the trigger (`on: workflow_run`) starts it, and an `if:`
+  gate (`conclusion == 'failure'`) skips it unless CI failed.
+- **When CI fails,** it installs the Copilot CLI and runs the agent with the
+  instructions as its prompt. The agent can only read. It acts only through
+  `safe-outputs`: create one issue and assign it to Copilot, or do nothing.
+- **The Copilot cloud agent** picks up the issue and opens a draft fix PR for a person
+  to review.
+
+**Agentic automation** like this uses a Copilot agent for jobs that need judgment,
+such as analyzing a failure or triaging issues. There are two places it can run:
 
 | | Copilot App automation | Agentic workflow (GitHub Actions) |
 | --- | --- | --- |
@@ -525,20 +541,48 @@ Before an agent runs on its own, check four things:
 3. **Outputs:** what it's allowed to create, such as an issue or comment.
 4. **Human oversight:** who reviews what it produces.
 
+#### 🎬 Demo only
+
+Watch the presenter's screen. You don't run this part.
+
+- **Tokens have been preconfigured** as Actions secrets in the presenter's repository
+  (**Settings → Secrets and variables → Actions**). Two are needed:
+  - `COPILOT_GITHUB_TOKEN` runs the agent. Fine-grained PAT, resource owner: **your
+    personal account** (it uses your Copilot seat). Repository access: Public
+    repositories. Account permission: **Copilot Requests: Read**.
+  - `GH_AW_AGENT_TOKEN` assigns the issue to Copilot (the built-in token can't).
+    Fine-grained PAT, resource owner: **the organization** that owns the repository.
+    Repository access: only that repository. Repository permissions: **Actions,
+    Contents, Issues, and Pull requests: Read and write** (Metadata: Read).
+- **Break the pull request.** In the cart session, the presenter sends:
+
+  ```text
+  Simplify getUnitPrice in frontend/src/context/CartContext.tsx so it always returns product.price, ignoring discounts. Don't change or run the tests. Commit with the message "refactor(cart): simplify unit price" and push this branch.
+  ```
+
+- **What happens** (about 7 minutes from the CI failure to a draft fix PR):
+  1. CI on the pull request fails at **Test Frontend**: the test "uses the discounted
+     price as the unit price" catches the change.
+  2. **Auto Analyze Build Failures** runs (**Actions** tab) and opens an issue,
+     "🔧 Auto-Remediation: Build Failure Run #…", that traces the failure to
+     `getUnitPrice` and lists a fix plan.
+  3. The issue is assigned to Copilot, which opens a draft pull request with the fix.
+
 #### 🧑‍💻 Hands-on
 
-> 3. Open `.github/workflows/auto-analyze-failures.md` (read it; don't run it). It
->    isn't called from `ci.yml`. Instead, its **trigger** (`on: workflow_run`) watches
->    the CI workflow and runs only when CI **fails**. Your CI passed, so it didn't run.
->    Also find its **permissions** (read-only) and its **outputs** (`safe-outputs`:
->    create an issue, assign it to Copilot, or do nothing).
+> 3. Open `.github/workflows/auto-analyze-failures.md` (read it; don't run it). Find
+>    its **trigger** (`on: workflow_run`, then the `if:` that checks for `failure`), its
+>    **permissions** (read-only), and its **outputs** (`safe-outputs`: create an issue,
+>    assign it to Copilot, or do nothing). Your CI passed and your repository has no
+>    tokens, so it didn't run.
 >
 > 4. **Optional, after the session:** in the Copilot App, create an automation for
 >    your repository (for example, a daily summary of open PRs). App automations need
 >    a private or internal repository, which yours is.
 
-**What to notice:** the agentic workflow's guardrails are written down and reviewable,
-and its outputs are real actions, not just logs.
+**What to notice:** deterministic CI caught the bug; the agent only diagnosed it and
+handed it off. Its guardrails are written down and reviewable, it never had write
+access, and a person still reviews the fix PR.
 
 **Learn more:** [GitHub Agentic Workflows](https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available/).
 
