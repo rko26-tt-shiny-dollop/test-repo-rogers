@@ -116,6 +116,9 @@ export default function Navigation() {
                 </span>
               )}
             </Link>
+            <span role="status" className="sr-only">
+              {`Cart, ${totalUnits} ${totalUnits === 1 ? 'item' : 'items'}`}
+            </span>
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full focus:outline-none transition-colors"
