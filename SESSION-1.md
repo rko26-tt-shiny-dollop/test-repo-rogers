@@ -432,15 +432,15 @@ why. CI runs alongside as separate evidence; green checks alone aren't approval.
 
 #### 🧑‍💻 Hands-on
 
-> 1. In the App session's **Changes** view, click **Create PR** [exact label to be
->    confirmed]. Let Copilot draft the description, and check it covers what changed,
->    why, and how it was tested (include your test result).
+> 1. At the top of the App session, click **Create PR**. Let Copilot draft the
+>    description, and check it covers what changed, why, and how it was tested
+>    (include your test result).
 >
-> 2. Open the pull request in the App (**My work**) or on GitHub. Look at the
->    overview and **Files changed**.
+> 2. Open the pull request in the App (**Pull requests** in the left sidebar) or on
+>    GitHub. Look at **Overview** and **Files**.
 >
-> 3. Request a **Copilot code review** [effort setting to be confirmed in
->    rehearsal].
+> 3. In the pull request, click **Reviewers** and choose **Copilot**. Wait for its
+>    review to appear.
 >
 > 4. Go through each finding: **accept**, **reject**, or **follow up**, with a
 >    one-line reason. Optionally, apply one suggested fix.
