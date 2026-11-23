@@ -56,8 +56,10 @@ put that guidance once. Before building any, see where each one lives and when i
 Most of these are files in the project itself. Open your repository's `.github/`
 folder, then `skills/`, `agents/`, and `hooks/`, and look at what's there.
 
-The Copilot App also has built-in skills. You'll find them, alongside your repository's
-skills, under **Customize → Skills**.
+**Customize → Skills** in the Copilot App lists two kinds of skills. Built-in skills come
+with the App and are available in every session. Repository skills come from each project
+you've added, and each one only loads in sessions for its own project, even though they all
+appear in the list together.
 
 ### What to notice
 
