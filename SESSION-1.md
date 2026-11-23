@@ -70,7 +70,7 @@ affecting anyone else.
 3. **Point your clone at your new repository** and push:
 
    ```bash
-   git remote set-url origin https://github.com/[your-username]/[your-name]-octocat-supply.git
+   git remote set-url origin [your new empty repo url]
    git remote -v
    git push -u origin main
    ```
