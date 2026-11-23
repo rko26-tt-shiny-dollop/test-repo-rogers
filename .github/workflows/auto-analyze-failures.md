@@ -4,17 +4,7 @@ description: Analyze failed workflow runs and open remediation issues when neede
 on:
   workflow_run:
     workflows:
-      - "Agentic Maintenance"
       - "🧪 CI - Build, Test and Lint"
-      - "CodeQL Advanced"
-      - "Copilot Setup Steps"
-      - "🚢 Deploy to Azure"
-      - "🐳 Build and Publish"
-      - "Test Auto-Analysis (Intentional Failure)"
-      - "Multi-Device Site Tester"
-      - "Daily Repo Activity Summary"
-      - "Dependabot Backlog Burn-Down"
-    types: [completed]
     branches:
       - main
       - "v-mattm-infomagnus-*"

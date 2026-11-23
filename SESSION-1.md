@@ -11,9 +11,6 @@
 >
 > Prompts and commands are in code blocks so they're easy to copy. If you fall
 > behind, pick up at the next step; your results don't need to match the screen.
->
-> **Draft, rehearsal pending:** prompts and commands have not been run
-> end to end yet. Items in [brackets] will be filled in after the dry-run.
 
 ---
 
@@ -62,7 +59,7 @@ affecting anyone else.
 1. **Clone the workshop starter:**
 
    ```bash
-   git clone [starter repository URL]
+   git clone https://github.com/rko26-tt-shiny-dollop/rogers-workshop-starter.git
    cd rogers-workshop-starter
    ```
 
@@ -85,8 +82,11 @@ affecting anyone else.
 
    ```bash
    make install
+   (cd frontend && npx playwright install chromium)
    make dev
    ```
+
+   The second line downloads the browser that S8 uses.
 
    Open <http://localhost:5137>, go to **Products**, and click **Add to Cart**. You'll
    see a pop-up and nothing else. That's our starting point. Stop the app with
@@ -317,7 +317,7 @@ setup (Vitest and React Testing Library) and a sample test,
 
 > 1. In the **same session**, switch the mode to **Interactive**.
 >
-> 2. Ask for focused tests (draft, to be rehearsed):
+> 2. Ask for focused tests:
 >
 >    ```text
 >    Write focused frontend tests for the cart, one per acceptance criterion from the plan. Follow the style of frontend/src/components/Navigation.test.tsx. At minimum, cover:
@@ -368,10 +368,10 @@ repository. Copilot can also work one-shot: `copilot -p` runs a single prompt an
 
 #### 🧑‍💻 Hands-on
 
-> 1. Open the worktree in a terminal and start the CLI:
+> 1. Open the **Terminal** tab in your App session's side panel. It opens in the
+>    session's worktree. Check the branch and start the CLI:
 >
 >    ```bash
->    cd [session worktree path]
 >    git status --short --branch
 >    copilot
 >    ```
@@ -573,8 +573,8 @@ Watch the presenter's screen. You don't run this part.
 > 3. Open `.github/workflows/auto-analyze-failures.md` and
 >    `.github/workflows/auto-analyze-failures.lock.yml` (read them; don't run them).
 >    Work out how the two files make the agentic automation work: what starts it, what
->    decides whether it acts, where Copilot runs, and what it's allowed to do. Your CI
->    passed and your repository has no tokens, so it didn't run.
+>    decides whether it acts, where Copilot runs, and what it's allowed to do. In your
+>    repository it didn't run: it only watches `main`, and there are no tokens.
 
 <details>
 <summary>Answer</summary>
@@ -618,8 +618,9 @@ Playwright test, and run it in a real browser while you watch.
 
 #### 🧑‍💻 Hands-on
 
-> 1. Make sure `make dev` is still running. In the terminal you used in S5, go to your
->    cart worktree and start the CLI:
+> 1. Make sure the app is still running at <http://localhost:5137>. If it isn't, ask
+>    your App session to start it with `make dev`. Then, in the session's **Terminal**
+>    tab, start the CLI:
 >
 >    ```bash
 >    copilot
@@ -697,7 +698,7 @@ decisions you made.
   [copilot-academy/octocat_supply@`0ac787d`](https://github.com/copilot-academy/octocat_supply/commit/0ac787d24a029e49ec97c3ca0441eec0ec85a00d)
   (full upstream tree, without upstream history), followed by this guide and the
   starter preparation commits.
-- **Participant starter:** `rogers-workshop-starter` [to be created]. It will be a
+- **Participant starter:** <https://github.com/rko26-tt-shiny-dollop/rogers-workshop-starter>. It is a
   **single-commit** snapshot of the sandbox's baseline (not the finished cart), so
   participants can push it to their own repositories. Upstream history contains a
   commit with demo credentials that GitHub push protection can block; a single-commit
@@ -709,24 +710,25 @@ decisions you made.
     skill).
   - Removed `.github/dependabot.yml` and the `build-and-publish`,
     `copilot-setup-steps`, and `test-auto-analysis` workflows, which failed or
-    created noise on every push.
-  - `ci.yml` runs frontend lint and build but not the frontend tests. Adding a test
-    step is pending approval.
+    created noise on every push. Also removed `codeql-advanced` (needs Code Security
+    on private repositories), the scheduled `daily-repo-activity-summary` and
+    `agentics-maintenance` workflows (no tokens in participant repositories), and
+    the unused `deploy` workflow.
+  - Added a **Test Frontend** step to `ci.yml`.
+  - `auto-analyze-failures` watches only CI. In the sandbox it runs for `main` and
+    `v-mattm-infomagnus-*` (for the S7 demo); in the starter, only `main`.
+  - The starter's copy of this guide leaves out this facilitator section.
 - **Licensing:** there is no standalone LICENSE/NOTICE file; `api/package.json`
   declares MIT. Confirm redistribution expectations before sharing the starter.
 
 ### Pre-session steps
 
-- [ ] Create `rogers-workshop-starter` as a single commit from the rehearsed baseline
-      and fill in the starter URL in *Set up your own repository*.
 - [ ] Confirm participants can create private repositories and push the starter to
       them.
 - [ ] Rehearse S2-S3 end to end in the sandbox. There is no prepared fallback cart;
       if a build stalls, participants describe the symptom to the session or follow
       along on screen.
 - [ ] Confirm the S4 test command.
-- [ ] Fill in all [bracketed] items: starter URL, worktree path location, Create PR
-      label, and code review effort setting.
 - [ ] Confirm App, Fusion, CLI, and Copilot code review availability under Rogers'
       policies, and practice the fallbacks below.
 
@@ -744,10 +746,10 @@ decisions you made.
   narrow the test list or switch approach.
 - **S5:** confirm `/diff`, `/review`, and `copilot -p` piping behave as written.
 - **S6:** don't merge or use Agent Merge.
-- **S7:** read-only. Don't run, compile, or dispatch agentic workflows. The
-  failure-analysis workflow expects a `COPILOT_GITHUB_TOKEN` secret and can create
-  issues; don't provision it during the session. Its trigger list still names the
-  removed "Copilot Setup Steps" workflow, which is harmless.
+- **S7:** participants only read the workflow files. The presenter runs the demo from
+  the sandbox, which has both tokens set. Before the demo, close any open issue that
+  references the same CI run (the workflow skips duplicates), and make sure the cart
+  PR's tests pass so the breaking prompt is what turns CI red.
 - **S8:** participants work on their own cart branch, so results will vary; that's
   expected.
 
@@ -777,9 +779,9 @@ Follow this guide during Session 1; use the originals for deeper exploration.
 
 | Source | Used in | What we use | What we leave out |
 | --- | --- | --- | --- |
-| [Getting work done with Copilot App](https://copilot-academy.github.io/labs/getting-work-done-with-copilot-app) | Setup, S1, S2, S7 | Adding a local folder; surfaces; chats vs sessions; modes; Fusion effort; App automations (optional) | The Pulse Analytics scenario, its artifacts, and canvases |
+| [Getting work done with Copilot App](https://copilot-academy.github.io/labs/getting-work-done-with-copilot-app) | Setup, S1, S2, S7 | Adding a local folder; surfaces; chats vs sessions; modes; Fusion effort; App automations (comparison only) | The Pulse Analytics scenario, its artifacts, and canvases |
 | [Copilot CLI: Zero to Hero](https://copilot-academy.github.io/labs/copilot-cli-zero-to-hero) | S5, S8 | `/diff`, `/review`, one-shot `copilot -p` with piped input, committing from the terminal, generating and running Playwright e2e tests | The Task Manager API build, installs and plugins, and `/delegate` |
 | [Feature development](https://copilot-academy.github.io/workshops/immersive-experience/feature_development) | S2, S3 | Planning from `docs/design/cart.png`, answering clarifying questions, building and verifying the cart | Opening the PR straight after the build (we do it in S6, after tests and local review) |
 | [Test coverage](https://copilot-academy.github.io/workshops/immersive-experience/test_coverage) | S4, S8 | Focused test generation with explicit criteria, self-healing test runs, verifying yourself | The API coverage target (80%); we test the frontend cart instead |
 | [Code review](https://copilot-academy.github.io/workshops/immersive-experience/code_review) | S6 | PR overview and files changed, Copilot code review, deciding on each finding, applying a fix | Agent Merge and auto-merge |
-| [Agentic workflows](https://copilot-academy.github.io/workshops/immersive-experience/agentic_workflows) | S7 | Choosing App automation vs agentic workflow; reading a workflow's trigger, permissions, and outputs | Creating, compiling, or running workflows live |
+| [Agentic workflows](https://copilot-academy.github.io/workshops/immersive-experience/agentic_workflows) | S7 | Choosing App automation vs agentic workflow; reading a workflow's trigger, permissions, and outputs | Creating or compiling workflows (the presenter demos one run) |
