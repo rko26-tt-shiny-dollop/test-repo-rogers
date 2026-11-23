@@ -36,6 +36,7 @@ safe-outputs:
   create-issue:
   assign-to-agent:
     allowed: [copilot]
+    target: "*"
   noop:
 network: {}
 ---
