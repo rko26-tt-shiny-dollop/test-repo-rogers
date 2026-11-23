@@ -10,20 +10,20 @@ it how your team works: package conventions as a **skill**, give work to special
 **custom agents**, enforce policy with **hooks**, bundle all three as a **plugin**, and
 hand recurring work to **agentic workflows**.
 
-You start by finishing the cart you built in Session 1.
+Today we'll cover skills, custom agents, hooks, and plugins. Agentic workflows are
+covered in Session 1's S7 (S6–S8).
 
 ## Agenda
 
 | Section | Topic | Surface |
 |---|---|---|
 | Setup | Your own repository (reuse your Session 1 repository if you have it) | Terminal, App |
-| S1 | Finish the Session 1 cart: code review, agentic workflows, browser test | App, GitHub.com, CLI |
-| S2 | The customization map | App (Customize) |
-| S3 | Skills | App |
-| S4 | Custom agents | App |
-| S5 | Hooks | App, terminal |
-| S6 | Plugins | CLI, App |
-| S7 | Wrap-up | |
+| S1 | The customization map | App (Customize) |
+| S2 | Skills | App |
+| S3 | Custom agents | App |
+| S4 | Hooks | App, terminal |
+| S5 | Plugins | CLI, App |
+| S6 | Wrap-up | |
 
 ---
 
@@ -35,47 +35,7 @@ Otherwise, follow *Set up your own repository* in Session 1:
 
 ---
 
-## S1. Finish the Session 1 cart
-
-If you attended Session 1, use your cart session from that day. If you don't have a
-cart, follow along on screen for this section; you'll be hands-on from S2.
-
-### Part 1: Pull request and Copilot code review
-
-Follow **S6** of the Session 1 guide:
-<https://github.com/rko26-tt-shiny-dollop/rogers-workshop-starter/blob/main/SESSION-1.md>
-
-### Part 2: Agentic workflows
-
-Source: Immersive Experience Use Case 12; Session 1 **S7**.
-
-#### Scenario
-
-Deterministic CI tells you something broke. An agentic workflow can work out why and
-propose a fix.
-
-#### Try it
-
-> 1. Open `.github/workflows/auto-analyze-failures.md` and its `.lock.yml`. Find what
->    starts it, what decides whether it acts, and what it's allowed to create.
-
-#### 🎬 Demo only: from a red build to a fix PR
-
-The presenter breaks a test on a branch, pushes, and follows the chain: CI fails, the
-agentic workflow opens an issue, and Copilot opens a draft fix PR.
-
-#### What to notice
-
-- CI caught the bug, the agentic workflow diagnosed it, and Copilot wrote the fix, but
-  it stopped at a draft PR because merging is still a person's call.
-
-### Part 3: Test the cart in a real browser from the CLI
-
-Follow **S8** of the Session 1 guide.
-
----
-
-## S2. The customization map
+## S1. The customization map
 
 ### Scenario
 
@@ -106,7 +66,7 @@ put that guidance once. Before building any, see where each one lives and when i
 
 ---
 
-## S3. Skills
+## S2. Skills
 
 Source: Immersive Experience Use Case 8.
 
@@ -135,7 +95,7 @@ docs, and tests. Copilot doesn't do all of it to your standards every time.
 
 ---
 
-## S4. Custom agents
+## S3. Custom agents
 
 Source: Immersive Experience Use Case 4.
 
@@ -168,7 +128,7 @@ code review approves or sends it back.
 
 ---
 
-## S5. Hooks
+## S4. Hooks
 
 Source: Immersive Experience Use Case 11.
 
@@ -197,7 +157,7 @@ Your team wants an auditable record of what Copilot changed.
 
 ---
 
-## S6. Plugins
+## S5. Plugins
 
 Source: [Creating a plugin for GitHub Copilot CLI](https://docs.github.com/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating).
 
@@ -207,7 +167,7 @@ Your skill, agent, and hook work in one repository. Other teams want them too.
 
 ### Try it
 
-> 1. Ask Copilot to package your S4 agent, the `api-endpoint` skill, and your S5 hook as
+> 1. Ask Copilot to package your S3 agent, the `api-endpoint` skill, and your S4 hook as
 >    a plugin in a new `plugins/team-toolkit/` folder with a `plugin.json` manifest.
 > 2. Install and check it from the CLI:
 >
@@ -223,13 +183,12 @@ Your skill, agent, and hook work in one repository. Other teams want them too.
 
 ---
 
-## S7. Wrap-up
+## S6. Wrap-up
 
 ### Putting it together
 
 | You did | With |
 |---|---|
-| Reviewed and tested the cart | Copilot code review, the CLI, Playwright |
 | Encoded a workflow | A skill |
 | Delegated to a specialist | A custom agent |
 | Enforced an audit trail | A hook |
