@@ -109,7 +109,7 @@ affecting anyone else.
 | 33-43 | S4. Test the cart | Generate and run focused tests |
 | 43-51 | S5. Review and commit in the Copilot CLI | Review locally, commit, and push |
 | 51-61 | S6. Pull request and Copilot code review | Open a PR and act on review findings |
-| 61-67 | S7. CI and agentic automation | Read your checks and an agentic workflow |
+| 61-67 | S7. Verify CI on your pull request | Read your checks, CI guardrails, and an agentic workflow |
 | 67-82 | S8. Extend the cart on your own | Run the whole loop yourself |
 | 82-90 | S9. Wrap-up | Reflect and plan next steps |
 
@@ -459,10 +459,11 @@ local review, and you still made the final call on every finding.
 
 ---
 
-## S7. CI and agentic automation (~6 min)
+## S7. Verify CI on your pull request (~6 min)
 
-**Scenario:** Your pull request ran checks. And when a build fails at 2 a.m., should
-a fixed script handle it, or an agent that can reason about the failure?
+**Scenario:** Before anyone merges the cart, you want proof it works. Copilot code
+review and a human reviewer can both miss things, so you'll check what CI ran on your
+pull request and what happens when it fails.
 
 **Background:** Ordinary CI runs **fixed steps** every time (install, lint, build,
 test). That's right for predictable jobs.
@@ -490,8 +491,9 @@ to pass**, with the CI jobs as the required checks:
 
 With these on, nobody can push straight to `main`, and a red CI run blocks the merge.
 
-**Agentic automation** uses a Copilot agent for jobs that need judgment, such as
-analyzing a failure or triaging issues. There are two places it can run:
+When CI fails, a second, **agentic** workflow can step in. **Agentic automation**
+uses a Copilot agent for jobs that need judgment, such as analyzing a failure or
+triaging issues. There are two places it can run:
 
 | | Copilot App automation | Agentic workflow (GitHub Actions) |
 | --- | --- | --- |
@@ -509,15 +511,18 @@ Before an agent runs on its own, check four things:
 #### 🧑‍💻 Hands-on
 
 > 1. On your pull request, open **Checks** and find the **🧪 CI - Build, Test and
->    Lint** run. Its jobs are fixed steps from `.github/workflows/ci.yml`.
+>    Lint** run.
 >
-> 2. Open `.github/workflows/auto-analyze-failures.md` (read it; don't run it). It
+> 2. Open `.github/workflows/ci.yml` and find each guardrail from the list above:
+>    `on: pull_request`, `npm ci`, lint, build, tests, and `if: always()`.
+>
+> 3. Open `.github/workflows/auto-analyze-failures.md` (read it; don't run it). It
 >    isn't called from `ci.yml`. Instead, its **trigger** (`on: workflow_run`) watches
 >    the CI workflow and runs only when CI **fails**. Your CI passed, so it didn't run.
 >    Also find its **permissions** (read-only) and its **outputs** (`safe-outputs`:
 >    create an issue, assign it to Copilot, or do nothing).
 >
-> 3. **Optional, after the session:** in the Copilot App, create an automation for
+> 4. **Optional, after the session:** in the Copilot App, create an automation for
 >    your repository (for example, a daily summary of open PRs). App automations need
 >    a private or internal repository, which yours is.
 
