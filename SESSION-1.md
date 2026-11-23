@@ -364,7 +364,7 @@ changes in the folder you start it in, so start it in the **same worktree** as y
 App session. `/diff` shows what changed and `/review` asks Copilot for a local review
 before anything leaves your machine. The starter includes a **code-review skill**
 (`.github/skills/code-review/SKILL.md`) that tells Copilot what to check in this
-repository. Copilot can also work one-shot: pipe in text and get a result back.
+repository. Copilot can also work one-shot: `copilot -p` runs a single prompt and returns the result.
 
 #### 🧑‍💻 Hands-on
 
@@ -392,25 +392,29 @@ repository. Copilot can also work one-shot: pipe in text and get a result back.
 >    Watch for Copilot loading the **code-review** skill on its own, because the
 >    request is about reviewing code. Compare its findings with `/review`.
 >
-> 4. Exit the CLI (`/exit`), then stage the changes and have Copilot write the commit
->    message (draft, to be rehearsed):
+> 4. Still in the CLI, type `!` to run shell commands, then stage the changes and have
+>    Copilot write the commit message:
 >
 >    ```bash
 >    git add -A
->    git diff --cached | copilot -p "Write a conventional commit message for this diff. Return only the message."
+>    copilot -p "Write a conventional commit message for my staged changes. Return only the message, with no code fences or explanation."
 >    ```
 >
-> 5. Commit with that message and push the branch to **your** repository:
+> 5. Commit and push. Type this at the **CLI prompt**:
 >
->    ```bash
->    git commit -m "[the message Copilot wrote]"
->    git push -u origin HEAD
+>    ```text
+>    Commit using that message and push this branch to origin
 >    ```
+>
+>    Check the command in the approval prompt, then choose **Yes**. Don't choose
+>    "don't ask again".
 >
 > **Done when** your branch appears in your repository on GitHub.
 
 **What to notice:** the CLI saw the App's changes because it opened the same
-worktree, and this local review happens before anyone else sees the code.
+worktree. Review, commit message, and push all stayed in one CLI session, and Copilot
+asked before it committed and pushed. This local review happens before anyone else
+sees the code.
 
 **Learn more:** [Copilot CLI](https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli).
 
