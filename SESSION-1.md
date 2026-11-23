@@ -439,17 +439,21 @@ why. CI runs alongside as separate evidence; green checks alone aren't approval.
 > 2. Open the pull request in the App (**Pull requests** in the left sidebar) or on
 >    GitHub. Look at **Overview** and **Files**.
 >
-> 3. In the pull request, click **Reviewers** and choose **Copilot**. Wait for its
->    review to appear.
+> 3. In the pull request, click **Reviewers** and choose **Copilot**. It runs at
+>    **Balanced** effort by default. Wait for its review to appear.
 >
-> 4. Go through each finding: **accept**, **reject**, or **follow up**, with a
->    one-line reason. Optionally, apply one suggested fix.
+> 4. Each finding shows a severity: **High**, **Medium**, or **Low**. For each one,
+>    read the reason and decide:
+>    -to apply it, click **Commit suggestion**;
+>    -to skip it, reply with a one-line reason, then click **Resolve conversation**.
+>
+>    Commit at least one suggestion.
 >
 > **Done when** every finding has a decision. Don't merge yet; S7 looks at the checks
 > first.
 
-**What to notice:** Copilot gave the first pass, and you made the final call on every
-finding.
+**What to notice:** Copilot code review used the same **code-review skill** as your
+local review, and you still made the final call on every finding.
 
 **Learn more:** [Copilot code review](https://docs.github.com/copilot/concepts/code-review).
 
