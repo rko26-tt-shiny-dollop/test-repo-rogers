@@ -499,8 +499,17 @@ With these on, nobody can push straight to `main`, and a red CI run blocks the m
 > 2. Open `.github/workflows/ci.yml` and find each guardrail from the list above:
 >    `on: pull_request`, `npm ci`, lint, build, tests, and `if: always()`.
 
-When CI fails, a second, **agentic** workflow can step in. **Agentic automation**
-uses a Copilot agent for jobs that need judgment, such as analyzing a failure or
+**Not all automation is agentic.** Three kinds show up in a repository:
+
+- **Deterministic workflow:** fixed steps, like `ci.yml`. Its **Generate Report** job
+  also posts the results on your pull request.
+- **AI step in a workflow:** an ordinary workflow step that sends one prompt to a
+  model, such as summarizing a change. No tools, no decisions.
+- **Agentic workflow:** an agent that reads, reasons, and acts only through approved
+  outputs, like `auto-analyze-failures.md`.
+
+When CI fails, an agentic workflow can step in. **Agentic automation** uses a Copilot
+agent for jobs that need judgment, such as analyzing a failure or
 triaging issues. There are two places it can run:
 
 | | Copilot App automation | Agentic workflow (GitHub Actions) |
