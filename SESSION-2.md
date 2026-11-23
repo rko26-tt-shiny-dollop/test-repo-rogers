@@ -118,8 +118,6 @@ Observe the output. Were the custom scoped instructions followed?
 
 ## S2. Skills
 
-Source: Immersive Experience Use Case 8.
-
 ### Scenario
 
 Adding an API entity touches a model, repository, routes, migration, seed data, Swagger
@@ -134,8 +132,13 @@ docs, and tests. Copilot doesn't do all of it to your standards every time.
 >    Add a new API endpoint for a new Entity called 'DeliveryVehicle'. Vehicles belong to branches.
 >    ```
 >
-> 3. When it finishes, ask it to run `make test-api`, then open
->    <http://localhost:3000/api-docs> and find the DeliveryVehicle endpoints.
+> 3. When it finishes, send:
+>
+>    ```text
+>    run make test-api
+>    ```
+>
+>    Then open <http://localhost:3000/api-docs> and find the DeliveryVehicle endpoints.
 
 ### What to notice
 
