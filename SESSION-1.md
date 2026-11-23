@@ -570,15 +570,34 @@ Watch the presenter's screen. You don't run this part.
 
 #### 🧑‍💻 Hands-on
 
-> 3. Open `.github/workflows/auto-analyze-failures.md` (read it; don't run it). Find
->    its **trigger** (`on: workflow_run`, then the `if:` that checks for `failure`), its
->    **permissions** (read-only), and its **outputs** (`safe-outputs`: create an issue,
->    assign it to Copilot, or do nothing). Your CI passed and your repository has no
->    tokens, so it didn't run.
->
-> 4. **Optional, after the session:** in the Copilot App, create an automation for
->    your repository (for example, a daily summary of open PRs). App automations need
->    a private or internal repository, which yours is.
+> 3. Open `.github/workflows/auto-analyze-failures.md` and
+>    `.github/workflows/auto-analyze-failures.lock.yml` (read them; don't run them).
+>    Work out how the two files make the agentic automation work: what starts it, what
+>    decides whether it acts, where Copilot runs, and what it's allowed to do. Your CI
+>    passed and your repository has no tokens, so it didn't run.
+
+<details>
+<summary>Answer</summary>
+
+- **`auto-analyze-failures.md` is the source.** The settings sit between the `---`
+  lines at the top. The rest is the agent's instructions.
+  - `on: workflow_run` with `🧪 CI - Build, Test and Lint` under `workflows:`: start
+    every time CI finishes.
+  - `if: ... conclusion == 'failure'`: act only when CI failed.
+  - `permissions:`: read-only.
+  - `safe-outputs:`: the only writes allowed (`create-issue`, `assign-to-agent` for
+    Copilot, or `noop` to do nothing).
+- **`auto-analyze-failures.lock.yml` is what GitHub Actions runs.** `gh aw compile`
+  generated it from the `.md` (see "DO NOT EDIT" at the top).
+  - The same `workflow_run` trigger is at the top, and the same `if:` is copied onto
+    the `activation` job. When CI passes, that job is skipped and nothing else runs.
+  - The `agent` job runs **Install GitHub Copilot CLI**, then **Execute GitHub Copilot
+    CLI**, which runs `copilot --prompt` with the `.md` instructions, signed in with
+    `COPILOT_GITHUB_TOKEN`.
+  - The `safe_outputs` job runs **Process Safe Outputs**, which creates the issue and
+    assigns it to Copilot with `GH_AW_AGENT_TOKEN`. The agent never writes directly.
+
+</details>
 
 **What to notice:** deterministic CI caught the bug; the agent only diagnosed it and
 handed it off. Its guardrails are written down and reviewable, it never had write
