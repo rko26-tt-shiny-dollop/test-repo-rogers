@@ -383,8 +383,7 @@ repository. Copilot can also work one-shot: pipe in text and get a result back.
 >    /review
 >    ```
 >
-> 3. Ask for a review in your own words, without naming the skill (draft, to be
->    rehearsed):
+> 3. Ask for a review in your own words, without naming the skill:
 >
 >    ```text
 >    review my code before I commit and report back
