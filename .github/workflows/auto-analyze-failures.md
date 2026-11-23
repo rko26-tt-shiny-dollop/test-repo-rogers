@@ -15,6 +15,9 @@ on:
       - "Daily Repo Activity Summary"
       - "Dependabot Backlog Burn-Down"
     types: [completed]
+    branches:
+      - main
+      - "v-mattm-infomagnus-*"
 if: "${{ github.event.workflow_run.conclusion == 'failure' }}"
 concurrency:
   group: "${{ github.workflow }}-${{ github.event.workflow_run.id }}"
