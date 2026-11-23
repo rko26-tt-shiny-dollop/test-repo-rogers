@@ -560,7 +560,7 @@ Watch the presenter's screen. You don't run this part.
   Simplify getUnitPrice in frontend/src/context/CartContext.tsx so it always returns product.price, ignoring discounts. Don't change or run the tests. Commit with the message "refactor(cart): simplify unit price" and push this branch.
   ```
 
-- **What happens** (about 7 minutes from the CI failure to a draft fix PR):
+- **What happens:**
   1. CI on the pull request fails at **Test Frontend**: the test "uses the discounted
      price as the unit price" catches the change.
   2. **Auto Analyze Build Failures** runs (**Actions** tab) and opens an issue,
