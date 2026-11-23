@@ -383,14 +383,14 @@ repository. Copilot can also work one-shot: pipe in text and get a result back.
 >    /review
 >    ```
 >
->    Optionally, ask for a review using the repository's skill (draft, to be
+> 3. **Optional:** ask for a review using the repository's skill (draft, to be
 >    rehearsed):
 >
 >    ```text
 >    Use the code-review skill to review my uncommitted changes against the cart acceptance criteria.
 >    ```
 >
-> 3. Exit the CLI (`/exit`), then stage the changes and have Copilot write the commit
+> 4. Exit the CLI (`/exit`), then stage the changes and have Copilot write the commit
 >    message (draft, to be rehearsed):
 >
 >    ```bash
@@ -398,7 +398,7 @@ repository. Copilot can also work one-shot: pipe in text and get a result back.
 >    git diff --cached | copilot -p "Write a conventional commit message for this diff. Return only the message."
 >    ```
 >
-> 4. Commit with that message and push the branch to **your** repository:
+> 5. Commit with that message and push the branch to **your** repository:
 >
 >    ```bash
 >    git commit -m "[the message Copilot wrote]"
