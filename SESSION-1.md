@@ -480,18 +480,14 @@ Before an agent runs on its own, check four things:
 
 #### 🧑‍💻 Hands-on
 
-> 1. On your pull request, open the **Checks** and find the CI job that ran lint and
->    build for your change.
+> 1. On your pull request, open **Checks** and find the **🧪 CI - Build, Test and
+>    Lint** run. Its jobs are fixed steps from `.github/workflows/ci.yml`.
 >
-> 2. Open these files in your repository (read them; don't run them):
->
->    ```text
->    .github/workflows/ci.yml                     # ordinary CI: fixed steps
->    .github/workflows/auto-analyze-failures.md   # agentic workflow: instructions and guardrails
->    ```
->
->    In the agentic file, find the **trigger**, the **permissions**, and the
->    **outputs** it's allowed to create.
+> 2. Open `.github/workflows/auto-analyze-failures.md` (read it; don't run it). It
+>    isn't called from `ci.yml`. Instead, its **trigger** (`on: workflow_run`) watches
+>    the CI workflow and runs only when CI **fails**. Your CI passed, so it didn't run.
+>    Also find its **permissions** (read-only) and its **outputs** (`safe-outputs`:
+>    create an issue, assign it to Copilot, or do nothing).
 >
 > 3. **Optional, after the session:** in the Copilot App, create an automation for
 >    your repository (for example, a daily summary of open PRs). App automations need
