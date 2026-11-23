@@ -477,8 +477,18 @@ can miss things. CI runs the same checks the same way on every pull request:
 - `npm test` / `npm run test:coverage`: run the tests you wrote in S4.
 - `if: always()`: every check runs even if one fails, so you see every problem at once.
 
-CI only protects `main` if the checks are **required** before merging (a ruleset or
-branch protection).
+CI only protects `main` if the checks are **required** before merging. Your
+repository doesn't require them yet. In a team repository, a ruleset (**Settings →
+Rules → Rulesets**) usually targets the **default branch**:
+
+![Ruleset target branches set to Default](docs/images/ruleset-target-default.png)
+
+and turns on **Require a pull request before merging** and **Require status checks
+to pass**, with the CI jobs as the required checks:
+
+![Ruleset rules: require a pull request and require status checks](docs/images/ruleset-rules.png)
+
+With these on, nobody can push straight to `main`, and a red CI run blocks the merge.
 
 **Agentic automation** uses a Copilot agent for jobs that need judgment, such as
 analyzing a failure or triaging issues. There are two places it can run:
