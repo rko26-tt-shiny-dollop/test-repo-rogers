@@ -468,6 +468,14 @@ pull request and what happens when it fails.
 **Background:** Ordinary CI runs **fixed steps** every time (install, lint, build,
 test). That's right for predictable jobs.
 
+#### 🧑‍💻 Hands-on
+
+> 1. On your pull request, open **Checks** and find the **🧪 CI - Build, Test and
+>    Lint** run.
+>
+> 2. Open `.github/workflows/ci.yml` and keep it open. Find each guardrail in the list
+>    below: `on: pull_request`, `npm ci`, lint, build, tests, and `if: always()`.
+
 **Where CI adds deterministic guardrails.** Copilot code review and human reviewers
 can miss things. CI runs the same checks the same way on every pull request:
 
@@ -490,14 +498,6 @@ to pass**, with the CI jobs as the required checks:
 ![Ruleset rules: require a pull request and require status checks](docs/images/ruleset-rules.png)
 
 With these on, nobody can push straight to `main`, and a red CI run blocks the merge.
-
-#### 🧑‍💻 Hands-on
-
-> 1. On your pull request, open **Checks** and find the **🧪 CI - Build, Test and
->    Lint** run.
->
-> 2. Open `.github/workflows/ci.yml` and find each guardrail from the list above:
->    `on: pull_request`, `npm ci`, lint, build, tests, and `if: always()`.
 
 **Not all automation is agentic.** Three kinds show up in a repository:
 
