@@ -89,18 +89,13 @@ Then, in the same session:
 confirm you've followed copilot-instructions.md to shape implementation and explain how
 ```
 
-**2. Scoped instructions.** Start a new session in **Plan** mode, so nothing gets
-changed, and send:
+**2. Scoped instructions.** Start a new session and send:
 
 ```text
-Review frontend/src/components/admin/AdminProducts.tsx. Don't change anything.
+Add a stock_quantity column to the products table by editing api/database/migrations/001_init.sql directly.
 ```
 
-Then, in the same session:
-
-```text
-Now review api/src/routes/product.ts the same way.
-```
+Observe the output. Were the custom scoped instructions followed?
 
 ### What to notice
 
@@ -110,12 +105,6 @@ Now review api/src/routes/product.ts the same way.
 - Copilot may not credit the instructions unless you ask, and it can credit the wrong
   file. The follow-up gets it to name the rules it applied, which you can check against
   the file.
-- In the second session, the first review follows
-  `.github/instructions/frontend.instructions.md`, such as React Query instead of
-  `useEffect` + `axios`, and splitting large components.
-- The second review swaps that for the API checklist, such as Swagger comments,
-  parameterized SQL, and shared error classes. Each instructions file's `applyTo` decides
-  which files it covers.
 - Instructions are always on; skills and agents load only when relevant or selected,
   which keeps context small.
 
