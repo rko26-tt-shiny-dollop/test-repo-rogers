@@ -47,6 +47,7 @@ put that guidance once. Before building any, see where each one lives and when i
 | Customization | Lives in | Loads | Good for |
 |---|---|---|---|
 | Custom instructions | `.github/copilot-instructions.md`, `.github/instructions/` | Always, or by file path | Standards that apply everywhere |
+| Prompt files | `.github/prompts/<name>.prompt.md` | When you run `/name` (VS Code and other IDEs only) | A reusable task you start by hand |
 | Skills | `.github/skills/<name>/SKILL.md` | When the task matches its description | Multi-step workflows with references or scripts |
 | Custom agents | `.github/agents/<name>.agent.md` | When you select it | A role with its own tools and rules |
 | Hooks | `.github/hooks/hooks.json` | On agent events (start, prompt, stop) | Audit, checkpoints, policy |
@@ -61,8 +62,31 @@ with the App and are available in every session. Repository skills come from eac
 you've added, and each one only loads in sessions for its own project, even though they all
 appear in the list together.
 
+Prompt files don't run in the Copilot App. In the App, a skill does the same job.
+
+### Try it
+
+Start a new session in **Plan** mode, so nothing gets changed, and send:
+
+```text
+Review frontend/src/components/admin/AdminProducts.tsx. Don't change anything.
+```
+
+Then, in the same session:
+
+```text
+Now review api/src/routes/product.ts the same way.
+```
+
 ### What to notice
 
+- Both reviews follow `.github/copilot-instructions.md`: findings in its escalation order
+  (security first), each with a "because" reason, quoting only the lines that need to change.
+- The first review also follows `.github/instructions/frontend.instructions.md`, such as
+  React Query instead of `useEffect` + `axios`, and splitting large components.
+- The second review swaps that for the API checklist, such as Swagger comments,
+  parameterized SQL, and shared error classes. Each instructions file's `applyTo` decides
+  which files it covers.
 - Instructions are always on; skills and agents load only when relevant or selected,
   which keeps context small.
 
