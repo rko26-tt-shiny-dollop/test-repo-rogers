@@ -11,7 +11,7 @@ it how your team works: package conventions as a **skill**, give work to special
 hand recurring work to **agentic workflows**.
 
 Today we'll cover skills, custom agents, hooks, and plugins. Agentic workflows are
-covered in Session 1's S7 (S6–S8).
+covered in Session 1's S7.
 
 ## Agenda
 
@@ -53,11 +53,11 @@ put that guidance once. Before building any, see where each one lives and when i
 | Plugins | Installed bundle with `plugin.json` | After install | Sharing agents, skills, and hooks together |
 | MCP servers | `.mcp.json` or App settings | When a tool is needed | Reaching external systems |
 
-### Try it
+Most of these are files in the project itself. Open your repository's `.github/`
+folder, then `skills/`, `agents/`, and `hooks/`, and look at what's there.
 
-> 1. In the App, open **Customize** and browse the skills, agents, and plugins available
->    to your repository.
-> 2. In your repository, open `.github/skills/`, `.github/agents/`, and `.github/hooks/`.
+The Copilot App also has built-in skills. You'll find them, alongside your repository's
+skills, under **Customize → Skills**.
 
 ### What to notice
 
