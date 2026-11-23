@@ -599,9 +599,9 @@ Watch the presenter's screen. You don't run this part.
 
 </details>
 
-**What to notice:** deterministic CI caught the bug; the agent only diagnosed it and
-handed it off. Its guardrails are written down and reviewable, it never had write
-access, and a person still reviews the fix PR.
+**What to notice:** deterministic CI caught the bug. The agentic workflow diagnosed it,
+and Copilot wrote the fix, but it stopped at a draft PR because merging is still a
+person's call.
 
 **Learn more:** [GitHub Agentic Workflows](https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available/).
 
