@@ -144,7 +144,13 @@ docs, and tests. Copilot doesn't do all of it to your standards every time.
 
 - Only the skill's name and description were in context until the task matched; then
   Copilot loaded the full instructions and references.
-- [Observed during rehearsal: which conventions it followed or missed.]
+- The skill shows up as its own step in the session, before Copilot reads any code.
+- One prompt produced the model, repository, routes with Swagger docs (registered in
+  `index.ts`), a new sequential migration, seed data, and repository and route tests,
+  then a clean build and passing tests.
+- The new table went into a new migration file rather than an edit to `001_init.sql`.
+- Copilot may commit to the worktree branch without being asked. Check the session's
+  changes before you continue.
 
 ---
 
