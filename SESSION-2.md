@@ -156,8 +156,6 @@ docs, and tests. Copilot doesn't do all of it to your standards every time.
 
 ## S3. Custom agents
 
-Source: Immersive Experience Use Case 4.
-
 ### Scenario
 
 Some work needs a specialist: a role with its own rules, tools, and boundaries.
@@ -182,6 +180,13 @@ code review approves or sends it back.
 
 ### What to notice
 
+- To check the agent ran as expected, compare its output with the rules in
+  `bdd-specialist.agent.md`. For example, look for:
+  - Gherkin scenarios that cover the normal flow, edge cases, and accessibility
+  - Playwright tests run on Chromium and Edge only
+  - existing tests left unchanged and still passing
+- The agent may stop whatever is running on ports 3000 and 5137 when it finishes,
+  including your `make dev` servers from Setup. Restart them if needed.
 - Each agent has a narrow job and limited tools. The human still chooses the ticket and
   approves the result.
 
