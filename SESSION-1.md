@@ -465,9 +465,23 @@ local review, and you still made the final call on every finding.
 a fixed script handle it, or an agent that can reason about the failure?
 
 **Background:** Ordinary CI runs **fixed steps** every time (install, lint, build,
-test). That's right for predictable jobs. **Agentic automation** uses a Copilot agent
-for jobs that need judgment, such as analyzing a failure or triaging issues. There
-are two places it can run:
+test). That's right for predictable jobs.
+
+**Where CI adds deterministic guardrails.** Copilot code review and human reviewers
+can miss things. CI runs the same checks the same way on every pull request:
+
+- `on: pull_request`: runs on every PR to `main`, so nobody has to remember.
+- `npm ci`: installs exactly what the lockfile says.
+- `npm run lint` and `npm run build`: catch style and type errors (the build runs
+  TypeScript).
+- `npm test` / `npm run test:coverage`: run the tests you wrote in S4.
+- `if: always()`: every check runs even if one fails, so you see every problem at once.
+
+CI only protects `main` if the checks are **required** before merging (a ruleset or
+branch protection).
+
+**Agentic automation** uses a Copilot agent for jobs that need judgment, such as
+analyzing a failure or triaging issues. There are two places it can run:
 
 | | Copilot App automation | Agentic workflow (GitHub Actions) |
 | --- | --- | --- |
