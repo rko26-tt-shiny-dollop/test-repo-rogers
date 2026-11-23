@@ -29,9 +29,7 @@ const CartContext = createContext<CartContextType>({
 });
 
 export function getUnitPrice(product: Product): number {
-  const hasDiscount = product.discount != null && product.discount > 0;
-  const price = hasDiscount ? product.price * (1 - product.discount!) : product.price;
-  return Math.round(price * 100) / 100;
+  return product.price;
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
