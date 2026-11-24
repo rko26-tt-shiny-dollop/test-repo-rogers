@@ -6,6 +6,9 @@
 
 set -euo pipefail
 
+# Delete the next line to turn on checkpoint commits
+exit 0
+
 # Check if we're in a git repository
 if ! git rev-parse --is-inside-work-tree &>/dev/null; then
   echo "⚠️  Not in a git repository"

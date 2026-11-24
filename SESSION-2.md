@@ -223,19 +223,23 @@ Your team wants an auditable record of what Copilot changed.
 >    open .github/hooks/hooks.json and .github/hooks/checkpoint-commit.sh in the editor
 >    ```
 >
->    Find the `sessionStart`, `UserPromptSubmit`, and `Stop` hooks that write to
->    `.agent.log`.
-> 2. In `hooks.json`, uncomment the `Stop` hook that calls `checkpoint-commit.sh`. In
->    the script, make the commit message end with
->    `Co-authored-by: GitHub Copilot <copilot@github.com>`.
+>    Find the `sessionStart`, `UserPromptSubmit`, and `Stop` hooks. Open `.agent.log`;
+>    your first prompt is already there. Run `git log -1` in the session's
+>    **Terminal** tab; the `Stop` hook ran the checkpoint script, but nothing was
+>    committed.
+> 2. In `checkpoint-commit.sh`, delete the `exit 0` line under
+>    "Delete the next line to turn on checkpoint commits", make the commit message
+>    end with `Co-authored-by: GitHub Copilot <copilot@github.com>`, and save.
 > 3. In the same session, prompt:
 >
 >    ```text
 >    Add two rocket emojis 🚀🚀 to the title in the README.
 >    ```
 >
-> 4. When the session stops, run `git log -1` in the session's **Terminal** tab, then
->    open `.agent.log`.
+> 4. When the response finishes, run `git log -1 --stat` in **Terminal**, then
+>    reopen `.agent.log`.
+>
+> Use a new session for the next section so checkpoint commits stay off.
 
 ### What to notice
 
