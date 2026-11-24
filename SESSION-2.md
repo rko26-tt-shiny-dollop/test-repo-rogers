@@ -187,7 +187,13 @@ Presenter setup:
    ensure this session is based off branch it was created from
    ```
 
-3. Open **+ → Agent** and select **tech-lead**.
+3. Then send:
+
+   ```text
+   ensure the frontend and backend servers are running from this session's worktree. If other servers conflict on the same ports, stop those processes and start the servers here
+   ```
+
+4. Open **+ → Agent** and select **tech-lead**.
 
 ### What to notice
 
