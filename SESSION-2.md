@@ -169,8 +169,6 @@ Some work needs a specialist: a role with its own rules, tools, and boundaries.
 >    ```text
 >    Add BDD tests for the product list page. Run the focused test suite and report the results.
 >    ```
->
-> 3. [Build your own agent: prompt to be finalized during rehearsal.]
 
 ### 🎬 Demo only: a team of agents across the SDLC
 
@@ -260,16 +258,26 @@ Source: [Creating a plugin for GitHub Copilot CLI](https://docs.github.com/copil
 
 ### Scenario
 
-Your skill, agent, and hook work in one repository. Other teams want them too.
+Your API agent, skill, and audit hooks work in this repository. Other teams building
+OctoCAT-style APIs want the same setup.
 
 ### Try it
 
-> 1. Ask Copilot to package your S3 agent, the `api-endpoint` skill, and your S4 hook as
->    a plugin in a new `plugins/team-toolkit/` folder with a `plugin.json` manifest.
-> 2. Install and check it from the CLI:
+> 1. Start a **New session** and prompt:
+>
+>    ```text
+>    Create a Copilot CLI plugin in plugins/octocat-api-toolkit/ (legacy plugin format, no $schema) that packages these existing customizations from this repository. Copy the files; don't move or change the originals.
+>    - Agent: copy .github/agents/api-specialist.agent.md to plugins/octocat-api-toolkit/agents/
+>    - Skill: copy .github/skills/api-endpoint/ (including references/) to plugins/octocat-api-toolkit/skills/api-endpoint/
+>    - Hooks: create plugins/octocat-api-toolkit/hooks.json containing only the sessionStart, UserPromptSubmit, and Stop hooks from .github/hooks/hooks.json that write to .agent.log. Leave out the checkpoint-commit hook.
+>    Add plugins/octocat-api-toolkit/plugin.json with name "octocat-api-toolkit", a one-line description, version "1.0.0", and agents, skills, and hooks fields pointing at those locations.
+>    ```
+>
+> 2. In the session's **Terminal** tab, install and check it:
 >
 >    ```bash
->    copilot plugin install ./plugins/team-toolkit
+>    copilot plugin install ./plugins/octocat-api-toolkit
+>    copilot plugin list
 >    ```
 >
 > 3. [Where to confirm it loaded in the App: to be confirmed during rehearsal.]
