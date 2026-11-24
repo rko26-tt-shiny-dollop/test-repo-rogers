@@ -1,5 +1,5 @@
 repository: rko26-tt-shiny-dollop/test-repo-rogers
-project_url: ""
+project_url: https://github.com/orgs/rko26-tt-shiny-dollop/projects/1
 base_branch: main
 branch_name_template: copilot-app/{issue_number}
 permitted_labels: []
