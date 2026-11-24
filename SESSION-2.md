@@ -211,26 +211,31 @@ Presenter setup:
 
 ## S4. Hooks
 
-Source: Immersive Experience Use Case 11.
-
 ### Scenario
 
 Your team wants an auditable record of what Copilot changed.
 
 ### Try it
 
-> 1. Open `.github/hooks/hooks.json`. Find the `sessionStart`, `UserPromptSubmit`, and
->    `Stop` hooks that write to `.agent.log`, then open `.agent.log`.
-> 2. Uncomment the `Stop` hook that calls `.github/hooks/checkpoint-commit.sh`. Edit
->    the script so the commit message ends with
+> 1. Start a **New session** and prompt:
+>
+>    ```text
+>    open .github/hooks/hooks.json and .github/hooks/checkpoint-commit.sh in the editor
+>    ```
+>
+>    Find the `sessionStart`, `UserPromptSubmit`, and `Stop` hooks that write to
+>    `.agent.log`.
+> 2. In `hooks.json`, uncomment the `Stop` hook that calls `checkpoint-commit.sh`. In
+>    the script, make the commit message end with
 >    `Co-authored-by: GitHub Copilot <copilot@github.com>`.
-> 3. In a new session, prompt:
+> 3. In the same session, prompt:
 >
 >    ```text
 >    Add two rocket emojis 🚀🚀 to the title in the README.
 >    ```
 >
-> 4. When the session stops, run `git log -1` in the session's **Terminal** tab.
+> 4. When the session stops, run `git log -1` in the session's **Terminal** tab, then
+>    open `.agent.log`.
 
 ### What to notice
 
