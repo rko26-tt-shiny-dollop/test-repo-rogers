@@ -178,6 +178,17 @@ The presenter runs a tech-lead agent that delegates to QA, PM, coding, and code-
 agents. QA finds a defect, PM writes a ticket, you pick it, coding implements it, and
 code review approves or sends it back.
 
+Presenter setup:
+
+1. Start a **New session** in a worktree with `demo/sdlc-custom-agents` as the base branch.
+2. Before selecting an agent, send:
+
+   ```text
+   ensure this session is based off branch it was created from
+   ```
+
+3. Open **+ → Agent** and select **tech-lead**.
+
 ### What to notice
 
 - To check the agent ran as expected, compare its output with the rules in
