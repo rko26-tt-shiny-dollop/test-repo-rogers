@@ -174,7 +174,7 @@ Some work needs a specialist: a role with its own rules, tools, and boundaries.
 
 Demonstration of an agentic delegation workflow between multiple agents.
 
-[![Custom agent swarm: tech-lead delegates to QA, PM, coding, code-review, and delivery agents](docs/images/sdlc-agent-swarm.png)](docs/images/sdlc-agent-swarm.png)
+[![Custom agent swarm: tech-lead delegates to QA, PM, coding, code-review, and delivery agents](docs/images/sdlc-agent-swarm.jpg)](docs/images/sdlc-agent-swarm.jpg)
 
 Setup:
 
