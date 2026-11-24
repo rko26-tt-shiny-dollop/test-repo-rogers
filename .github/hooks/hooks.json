@@ -13,7 +13,7 @@
     "UserPromptSubmit": [
       {
         "type": "command",
-        "bash": "echo \"[$(date)] Prompt used: $(cat | jq -r '.prompt')\" >> .agent.log",
+        "bash": "echo \"[$(date)] Prompt used: $(cat | jq -r '.prompt' | perl -0pe 's/<([\\w-]+)[^>]*>.*?<\\/\\1>//gs; s/This reference identifies.*//s; s/\\s+/ /g; s/^ | $//g')\" >> .agent.log",
         "powershell": "$input | ConvertFrom-Json | ForEach-Object { Add-Content -Path .agent.log -Value \"[$(Get-Date)] Prompt used: $($_.prompt)\" }",
         "cwd": ".",
         "timeoutSec": 30
