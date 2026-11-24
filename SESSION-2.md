@@ -263,7 +263,16 @@ OctoCAT-style APIs want the same setup, without copying files into every reposit
 
 ### 🧑‍💻 Hands-on
 
-> 1. Start a **New session** and prompt:
+> 1. See what another project has before you install. In a terminal, start the CLI in
+>    an empty folder:
+>
+>    ```bash
+>    mkdir ~/plugin-demo && cd ~/plugin-demo && copilot
+>    ```
+>
+>    Type `/agent`. There's no API Specialist. Type `/exit`.
+>
+> 2. In the App, start a **New session** in your workshop repository and prompt:
 >
 >    ```text
 >    Create a Copilot CLI plugin in plugins/octocat-api-toolkit/ (legacy plugin format, no $schema) that packages these existing customizations from this repository. Copy the files; don't move or change the originals.
@@ -273,29 +282,22 @@ OctoCAT-style APIs want the same setup, without copying files into every reposit
 >    Add plugins/octocat-api-toolkit/plugin.json with name "octocat-api-toolkit", a one-line description, version "1.0.0", and agents, skills, and hooks fields pointing at those locations.
 >    ```
 >
-> 2. See what another project has before you install. In the session's **Terminal** tab:
->
->    ```bash
->    mkdir ~/plugin-demo
->    ```
->
->    In the App, add it with **+ → Open local folder**, start a session there, and open
->    the agent picker. There's no API Specialist.
->
-> 3. Back in the **Terminal** tab of your first session, install and check the plugin:
+> 3. In that session's **Terminal** tab, install and check the plugin:
 >
 >    ```bash
 >    copilot plugin install ./plugins/octocat-api-toolkit
 >    copilot plugin list
 >    ```
 >
-> 4. Start a **New session** in `plugin-demo` and open the agent picker again. Then prompt:
+> 4. Back in your terminal, start the CLI in `plugin-demo` again:
 >
->    ```text
->    Which custom agents and skills are available to you?
+>    ```bash
+>    cd ~/plugin-demo && copilot
 >    ```
 >
->    In the Terminal tab, check that the plugin's hooks ran in this folder too:
+>    Type `/plugin` and `/agent`. The plugin and its agent,
+>    `octocat-api-toolkit:api-specialist`, are listed now. Ask a question, then type
+>    `/exit` and check that the plugin's hooks ran in this folder too:
 >
 >    ```bash
 >    cat ~/plugin-demo/.agent.log
@@ -306,6 +308,8 @@ OctoCAT-style APIs want the same setup, without copying files into every reposit
 - A plugin is how customizations travel between repositories and people: install
   once, and the agent, skill, and hooks work in a folder that has none of those files.
 - Plugins load when a session starts, so start a new session after installing.
+- In the App, a plugin installed from the CLI loads, but its agent doesn't appear in
+  the agent picker. To get it in the picker, install the plugin from **Customize**.
 
 ---
 
