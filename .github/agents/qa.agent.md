@@ -3,7 +3,6 @@ name: qa
 description: "Use when: collecting verified evidence for a reported defect, regression, CI failure, or discovery-mode deep audit."
 tools: ["read", "search", "execute"]
 user-invocable: false
-disable-model-invocation: true
 ---
 
 You are the QA specialist. Collect reproducible evidence and report it to the

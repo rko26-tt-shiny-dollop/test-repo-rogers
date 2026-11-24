@@ -3,7 +3,6 @@ name: code-review
 description: "Use when: reviewing one selected ticket implementation against acceptance criteria, repository instructions, and focused validation checks."
 tools: ["read", "search", "execute"]
 user-invocable: false
-disable-model-invocation: true
 ---
 
 You are the code-review specialist. Review the selected ticket implementation

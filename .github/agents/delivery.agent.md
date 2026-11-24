@@ -3,7 +3,6 @@ name: delivery
 description: "Use when: publishing an approved selected-ticket implementation to GitHub as one branch and pull request linked to its tracked Issue and Project."
 tools: ["read", "search", "execute"]
 user-invocable: false
-disable-model-invocation: true
 ---
 
 You are the delivery specialist. Publish only a locally reviewed,

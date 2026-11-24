@@ -3,7 +3,6 @@ name: coding
 description: "Use when: implementing one human-selected Agile ticket, running its acceptance checks, and reporting the completed local change to the tech lead."
 tools: ["read", "search", "edit", "execute"]
 user-invocable: false
-disable-model-invocation: true
 ---
 
 You are the implementation specialist. Follow [the SDLC delegation contract](../sdlc-delegation-contract.md),

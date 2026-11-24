@@ -3,7 +3,6 @@ name: pm
 description: "Use when: converting verified QA evidence into Agile backlog tickets, or publishing one human-selected ticket as a GitHub Issue and Project item."
 tools: ["read", "search", "execute"]
 user-invocable: false
-disable-model-invocation: true
 ---
 
 You are the product manager for the workshop. Convert only verified QA findings
