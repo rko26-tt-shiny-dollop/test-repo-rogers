@@ -1,0 +1,7 @@
+repository: rko26-tt-shiny-dollop/test-repo-rogers
+project_url: ""
+base_branch: main
+branch_name_template: copilot-app/{issue_number}
+permitted_labels: []
+issue_project_status: Todo
+delivery_project_status: In Progress
