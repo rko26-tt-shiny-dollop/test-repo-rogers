@@ -64,7 +64,7 @@ appear in the list together.
 
 Prompt files don't run in the Copilot App. In the App, a skill does the same job.
 
-### Try it
+### 🧑‍💻 Hands-on
 
 Pick a specific model, such as **Claude Sonnet 5**, rather than Fusion. Fusion can
 route each turn to a different model, so how closely the instructions are followed
@@ -123,7 +123,7 @@ Observe the output. Were the custom scoped instructions followed?
 Adding an API entity touches a model, repository, routes, migration, seed data, Swagger
 docs, and tests. Copilot doesn't do all of it to your standards every time.
 
-### Try it
+### 🧑‍💻 Hands-on
 
 > 1. Open `.github/skills/api-endpoint/SKILL.md` and its `references/` folder.
 > 2. Start a new session in a worktree, **Interactive** mode, model **Auto**:
@@ -160,7 +160,7 @@ docs, and tests. Copilot doesn't do all of it to your standards every time.
 
 Some work needs a specialist: a role with its own rules, tools, and boundaries.
 
-### Try it
+### 🧑‍💻 Hands-on
 
 > 1. Open `.github/agents/bdd-specialist.agent.md`. Notice its description, tools, and
 >    rules.
@@ -213,7 +213,7 @@ Presenter setup:
 
 Your team wants an auditable record of what Copilot changed.
 
-### Try it
+### 🧑‍💻 Hands-on
 
 > 1. Start a **New session** and prompt:
 >
@@ -259,9 +259,9 @@ Source: [Creating a plugin for GitHub Copilot CLI](https://docs.github.com/copil
 ### Scenario
 
 Your API agent, skill, and audit hooks work in this repository. Other teams building
-OctoCAT-style APIs want the same setup.
+OctoCAT-style APIs want the same setup, without copying files into every repository.
 
-### Try it
+### 🧑‍💻 Hands-on
 
 > 1. Start a **New session** and prompt:
 >
@@ -273,18 +273,39 @@ OctoCAT-style APIs want the same setup.
 >    Add plugins/octocat-api-toolkit/plugin.json with name "octocat-api-toolkit", a one-line description, version "1.0.0", and agents, skills, and hooks fields pointing at those locations.
 >    ```
 >
-> 2. In the session's **Terminal** tab, install and check it:
+> 2. See what another project has before you install. In the session's **Terminal** tab:
+>
+>    ```bash
+>    mkdir ~/plugin-demo
+>    ```
+>
+>    In the App, add it with **+ → Open local folder**, start a session there, and open
+>    the agent picker. There's no API Specialist.
+>
+> 3. Back in the **Terminal** tab of your first session, install and check the plugin:
 >
 >    ```bash
 >    copilot plugin install ./plugins/octocat-api-toolkit
 >    copilot plugin list
 >    ```
 >
-> 3. [Where to confirm it loaded in the App: to be confirmed during rehearsal.]
+> 4. Start a **New session** in `plugin-demo` and open the agent picker again. Then prompt:
+>
+>    ```text
+>    Which custom agents and skills are available to you?
+>    ```
+>
+>    In the Terminal tab, check that the plugin's hooks ran in this folder too:
+>
+>    ```bash
+>    cat ~/plugin-demo/.agent.log
+>    ```
 
 ### What to notice
 
-- A plugin is how customizations travel between repositories and people.
+- A plugin is how customizations travel between repositories and people: install
+  once, and the agent, skill, and hooks work in a folder that has none of those files.
+- Plugins load when a session starts, so start a new session after installing.
 
 ---
 
