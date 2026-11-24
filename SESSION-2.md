@@ -172,11 +172,9 @@ Some work needs a specialist: a role with its own rules, tools, and boundaries.
 
 ### 🎬 Demo only: a team of agents across the SDLC
 
-The presenter runs a tech-lead agent that delegates to QA, PM, coding, and code-review
-agents. QA finds a defect, PM writes a ticket, you pick it, coding implements it, and
-code review approves or sends it back.
+Demonstration of an agentic delegation workflow between multiple agents.
 
-Presenter setup:
+Setup:
 
 1. Start a **New session** in a worktree with `demo/sdlc-custom-agents` as the base branch.
 2. Before selecting an agent, send:
