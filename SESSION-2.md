@@ -228,8 +228,15 @@ Your team wants an auditable record of what Copilot changed.
 >    **Terminal** tab; the `Stop` hook ran the checkpoint script, but nothing was
 >    committed.
 > 2. In `checkpoint-commit.sh`, delete the `exit 0` line under
->    "Delete the next line to turn on checkpoint commits", make the commit message
->    end with `Co-authored-by: GitHub Copilot <copilot@github.com>`, and save.
+>    "Delete the next line to turn on checkpoint commits". Then add Copilot
+>    attribution to the commit message and save. For example:
+>
+>    ```bash
+>    git commit -m "[Checkpoint-commit] $TIMESTAMP
+>
+>    Co-authored-by: GitHub Copilot <copilot@github.com>" --no-verify 2>/dev/null || {
+>    ```
+>
 > 3. In the same session, prompt:
 >
 >    ```text
