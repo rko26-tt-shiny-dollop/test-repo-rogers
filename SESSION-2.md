@@ -259,6 +259,12 @@ Your team wants an auditable record of what Copilot changed.
 Your API agent, skill, and audit hooks work in this repository. Other teams building
 OctoCAT-style APIs want the same setup, without copying files into every repository.
 
+This exercise focuses on plugins in the Copilot App. You build a plugin in one session
+and install it once with the CLI. The CLI copies it to `~/.copilot/installed-plugins/`
+on your machine, so every App and CLI session on that machine can use it, including
+sessions in folders that have none of its files. VS Code also picks up plugins
+installed by the CLI.
+
 ### 🧑‍💻 Hands-on
 
 > 1. See what another project has before you install. In a terminal, start the CLI in
@@ -310,6 +316,57 @@ OctoCAT-style APIs want the same setup, without copying files into every reposit
 >
 >    Look for the `api-endpoint` skill being used. It comes from the plugin; this folder
 >    has no skills of its own.
+
+### Sharing plugins across teams
+
+A plugin installed on your machine helps only you. Plugins become more valuable when
+teams share them across repositories, teams, and organizations. There are three ways,
+from simplest to most automatic:
+
+1. **Install from a repository.** Push the plugin folder to any repository. A teammate
+   with read access runs:
+
+   ```bash
+   copilot plugin install <owner-name>/<repo-name>:<path>/<plugin-folder-name>
+   ```
+
+   In this exercise, `<path>` is `plugins` and `<plugin-folder-name>` is
+   `octocat-api-toolkit`.
+
+2. **Publish to a plugin marketplace.** A marketplace is an ordinary repository, private
+   to your org if you like, with a catalog at `.github/plugin/marketplace.json`. The
+   catalog's `name` field is the marketplace name. Teammates add the marketplace once,
+   then install plugins by name:
+
+   ```bash
+   copilot plugin marketplace add <owner-name>/<repo-name>
+   copilot plugin install <plugin-name>@<marketplace-name>
+   ```
+
+   GitHub's [plugin-marketplace-starter](https://github.com/github/plugin-marketplace-starter)
+   template includes validation checks. Treat changes like code: use CODEOWNERS and
+   pull request review.
+
+3. **Turn it on for a repository.** Commit `.github/copilot/settings.json` to a team's
+   repository. It says where the marketplace is and which plugins to enable:
+
+   ```json
+   {
+     "extraKnownMarketplaces": {
+       "<marketplace-name>": {
+         "source": { "source": "github", "repo": "<owner-name>/<repo-name>" }
+       }
+     },
+     "enabledPlugins": { "<plugin-name>@<marketplace-name>": true }
+   }
+   ```
+
+   Anyone who starts a session in that repository gets the plugin automatically, with no
+   install step. Copilot cloud agent reads the same file. Developers still need read
+   access to the marketplace repository.
+
+Enterprises can go further with managed settings, which require or block specific
+plugins for everyone.
 
 ### What to notice
 
