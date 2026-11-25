@@ -176,6 +176,20 @@ Demonstration of an agentic delegation workflow between multiple agents.
 
 [![Custom agent swarm: tech-lead delegates to QA, PM, coding, code-review, and delivery agents](docs/images/sdlc-agent-swarm.jpg)](docs/images/sdlc-agent-swarm.jpg)
 
+Create the demo branch:
+
+The swarm agents are stored in `docs/custom-agents/` so they don't replace the agents
+you use in the Hands-on. Copilot moves them into `.github` on a separate branch.
+
+1. Start a **New session** and pick **Current checkout** (on `main`).
+2. Send:
+
+   ```text
+   Create a branch demo/sdlc-custom-agents. Replace everything in .github/agents with the files in docs/custom-agents/agents, copy the other two files in docs/custom-agents into .github, set repository in .github/sdlc-delivery-config.yml to this repository, then commit and push the branch.
+   ```
+
+3. Switch your checkout back to `main`, for example with `git checkout main`.
+
 Setup:
 
 1. Start a **New session** in a worktree with `demo/sdlc-custom-agents` as the base branch.
@@ -192,6 +206,11 @@ Setup:
    ```
 
 4. Open **+ → Agent** and select **tech-lead**.
+5. Send:
+
+   ```text
+   kickoff agentic flow process - delegate to the qa agent
+   ```
 
 ### What to notice
 
