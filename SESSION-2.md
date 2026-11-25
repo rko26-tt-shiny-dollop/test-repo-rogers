@@ -29,8 +29,20 @@ covered in Session 1's S7.
 
 ## Set up your own repository
 
-If you attended Session 1, open the same repository in the App and skip to S1.
-Otherwise, follow *Set up your own repository* in Session 1:
+If you attended Session 1, bring your repository up to date with the starter. It
+adds this guide and the files the demos use.
+
+1. In the App, open your Session 1 repository and start a **New session**. Pick
+   **Current checkout** (on `main`).
+2. Send:
+
+   ```text
+   Merge the latest main branch from https://github.com/rko26-tt-shiny-dollop/rogers-workshop-starter into my main branch using git (add it as a remote named starter). Before merging, list any files that would conflict and stop so I can decide. If there are no conflicts, merge and push to origin main.
+   ```
+
+3. Check that `SESSION-2.md` and `docs/custom-agents/` are now in your repository.
+
+If you didn't attend Session 1, follow *Set up your own repository* in Session 1:
 <https://github.com/rko26-tt-shiny-dollop/rogers-workshop-starter/blob/main/SESSION-1.md>
 
 ---
@@ -181,14 +193,17 @@ Create the demo branch:
 The swarm agents are stored in `docs/custom-agents/` so they don't replace the agents
 you use in the Hands-on. Copilot moves them into `.github` on a separate branch.
 
-1. Start a **New session** and pick **Current checkout** (on `main`).
-2. Send:
+1. Create a GitHub Project board for the PM and delivery agents: **Projects → New
+   project → Board**. Keep the **Todo** and **In Progress** status columns, which the
+   agents use. Copy the project's URL.
+2. Start a **New session** and pick **Current checkout** (on `main`).
+3. Send, replacing `<project-url>` with your project's URL:
 
    ```text
-   Create a branch demo/sdlc-custom-agents. Replace everything in .github/agents with the files in docs/custom-agents/agents, copy the other two files in docs/custom-agents into .github, set repository in .github/sdlc-delivery-config.yml to this repository, then commit and push the branch.
+   Create a branch demo/sdlc-custom-agents. Replace everything in .github/agents with the files in docs/custom-agents/agents, copy the other two files in docs/custom-agents into .github, set repository in .github/sdlc-delivery-config.yml to this repository and project_url to <project-url>, then commit and push the branch.
    ```
 
-3. Switch your checkout back to `main`, for example with `git checkout main`.
+4. Switch your checkout back to `main`, for example with `git checkout main`.
 
 Setup:
 
