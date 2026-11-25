@@ -302,14 +302,26 @@ OctoCAT-style APIs want the same setup, without copying files into every reposit
 >    ```bash
 >    cat ~/plugin-demo/.agent.log
 >    ```
+>
+> 5. Check it in the App too. Add `~/plugin-demo` with **+ → Open local folder**, start a
+>    **New session** there, and prompt:
+>
+>    ```text
+>    design a GET /api/suppliers/:id/products endpoint for an Express + TypeScript API: route, repository method, model, and Swagger comment. Don't create files; just show the design.
+>    ```
+>
+>    Look for the `api-endpoint` skill being used. It comes from the plugin; this folder
+>    has no skills of its own.
 
 ### What to notice
 
 - A plugin is how customizations travel between repositories and people: install
   once, and the agent, skill, and hooks work in a folder that has none of those files.
 - Plugins load when a session starts, so start a new session after installing.
-- In the App, a plugin installed from the CLI loads, but its agent doesn't appear in
-  the agent picker. To get it in the picker, install the plugin from **Customize**.
+- In the App, the plugin's agent may not show in the agent picker, but its skill and
+  hooks still work in chat.
+- Skills load when Copilot thinks they help. In a repository that already shows the
+  patterns, it may just read the code instead.
 
 ---
 
