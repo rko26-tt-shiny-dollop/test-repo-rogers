@@ -254,8 +254,6 @@ Your team wants an auditable record of what Copilot changed.
 
 ## S5. Plugins
 
-Source: [Creating a plugin for GitHub Copilot CLI](https://docs.github.com/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating).
-
 ### Scenario
 
 Your API agent, skill, and audit hooks work in this repository. Other teams building
