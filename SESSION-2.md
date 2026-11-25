@@ -343,6 +343,12 @@ from simplest to most automatic:
    copilot plugin install <plugin-name>@<marketplace-name>
    ```
 
+   The catalog lists each plugin's name, version, and `source`. A source can be a folder
+   in the marketplace repo, another team's repo, or a third-party repo, so one
+   marketplace can collect approved plugins from anywhere. See
+   [awesome-copilot's catalog](https://github.com/github/awesome-copilot/blob/main/.github/plugin/marketplace.json)
+   for a real example.
+
    GitHub's [plugin-marketplace-starter](https://github.com/github/plugin-marketplace-starter)
    template includes validation checks. Treat changes like code: use CODEOWNERS and
    pull request review.
