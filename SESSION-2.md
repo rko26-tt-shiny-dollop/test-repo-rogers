@@ -267,14 +267,10 @@ installed by the CLI.
 
 ### 🧑‍💻 Hands-on
 
-> 1. See what another project has before you install. In a terminal, start the CLI in
->    an empty folder:
->
->    ```bash
->    mkdir ~/plugin-demo && cd ~/plugin-demo && copilot
->    ```
->
->    Type `/agent`. There's no API Specialist. Type `/exit`.
+> 1. Create an empty folder called `plugin-demo`, anywhere and however you like. You'll
+>    use it later to show that the plugin works in any project directory. In a terminal,
+>    start `copilot` in that folder and type `/plugin`. On the **Installed** tab, you'll
+>    likely see only built-in plugins. Type `/exit`.
 >
 > 2. In the App, start a **New session** in your workshop repository and prompt:
 >
@@ -293,29 +289,25 @@ installed by the CLI.
 >    copilot plugin list
 >    ```
 >
-> 4. Back in your terminal, start the CLI in `plugin-demo` again:
->
->    ```bash
->    cd ~/plugin-demo && copilot
->    ```
->
->    Type `/plugin` and `/agent`. The plugin and its agent,
->    `octocat-api-toolkit:api-specialist`, are listed now. Ask a question, then type
->    `/exit` and check that the plugin's hooks ran in this folder too:
->
->    ```bash
->    cat ~/plugin-demo/.agent.log
->    ```
->
-> 5. Check it in the App too. Add `~/plugin-demo` with **+ → Open local folder**, start a
+> 4. In the App, add your `plugin-demo` folder with **+ → Open local folder**, start a
 >    **New session** there, and prompt:
 >
 >    ```text
 >    design a GET /api/suppliers/:id/products endpoint for an Express + TypeScript API: route, repository method, model, and Swagger comment. Don't create files; just show the design.
 >    ```
 >
->    Look for the `api-endpoint` skill being used. It comes from the plugin; this folder
->    has no skills of its own.
+>    Look for the `api-endpoint` skill being used. It comes from the plugin, because this
+>    folder has no skills of its own. Then, in that session's **Terminal** tab, run:
+>
+>    ```bash
+>    cat .agent.log
+>    ```
+>
+>    The plugin's hooks created it in `plugin-demo` too.
+>
+> 5. Back in your terminal, start `copilot` in `plugin-demo` again. Type `/plugin`:
+>    `octocat-api-toolkit` is now on the **Installed** tab, marked **User**. Type `/agent`
+>    to see its agent, `octocat-api-toolkit:api-specialist`. Type `/exit`.
 
 ### Sharing plugins across teams
 
